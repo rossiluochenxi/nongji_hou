@@ -70,7 +70,10 @@
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-dm</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-agri</artifactId>
+        </dependency>
 
 
     </dependencies>

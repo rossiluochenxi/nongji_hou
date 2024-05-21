@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.agri.mapper.ArgiMachineryMapper">
+    
+    <resultMap type="ArgiMachinery" id="ArgiMachineryResult">
+        <result property="id"    column="id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="name"    column="name"    />
+        <result property="hostNum"    column="host_num"    />
+        <result property="tasksStatus"    column="tasks_status"    />
+        <result property="tasksId"    column="tasks_id"    />
+        <result property="machineryType"    column="machinery_type"    />
+        <result property="machineryLength"    column="machinery_length"    />
+    </resultMap>
+
+    <sql id="selectArgiMachineryVo">
+        select id, create_by, create_time, update_by, update_time, user_id, dept_id, name, host_num, tasks_status, tasks_id, machinery_type, machinery_length from argi_machinery
+    </sql>
+
+    <select id="selectArgiMachineryList" parameterType="ArgiMachinery" resultMap="ArgiMachineryResult">
+        <include refid="selectArgiMachineryVo"/>
+        <where>  
+            <if test="hostNum != null  and hostNum != ''"> and host_num like concat('%', #{hostNum}, '%')</if>
+            <if test="machineryType != null  and machineryType != ''"> and machinery_type = #{machineryType}</if>
+            <if test="machineryLength != null "> and machinery_length = #{machineryLength}</if>
+        </where>
+    </select>
+    
+    <select id="selectArgiMachineryById" parameterType="String" resultMap="ArgiMachineryResult">
+        <include refid="selectArgiMachineryVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertArgiMachinery" parameterType="ArgiMachinery">
+        insert into argi_machinery
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="name != null">name,</if>
+            <if test="hostNum != null">host_num,</if>
+            <if test="tasksStatus != null">tasks_status,</if>
+            <if test="tasksId != null">tasks_id,</if>
+            <if test="machineryType != null">machinery_type,</if>
+            <if test="machineryLength != null">machinery_length,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="name != null">#{name},</if>
+            <if test="hostNum != null">#{hostNum},</if>
+            <if test="tasksStatus != null">#{tasksStatus},</if>
+            <if test="tasksId != null">#{tasksId},</if>
+            <if test="machineryType != null">#{machineryType},</if>
+            <if test="machineryLength != null">#{machineryLength},</if>
+         </trim>
+    </insert>
+
+    <update id="updateArgiMachinery" parameterType="ArgiMachinery">
+        update argi_machinery
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="hostNum != null">host_num = #{hostNum},</if>
+            <if test="tasksStatus != null">tasks_status = #{tasksStatus},</if>
+            <if test="tasksId != null">tasks_id = #{tasksId},</if>
+            <if test="machineryType != null">machinery_type = #{machineryType},</if>
+            <if test="machineryLength != null">machinery_length = #{machineryLength},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteArgiMachineryById" parameterType="String">
+        delete from argi_machinery where id = #{id}
+    </delete>
+
+    <delete id="deleteArgiMachineryByIds" parameterType="String">
+        delete from argi_machinery where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

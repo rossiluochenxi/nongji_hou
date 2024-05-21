@@ -45,6 +45,31 @@ public class SysUser extends BaseEntity
     @Excel(name = "手机号码")
     private String phonenumber;
 
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
+    }
+
+    public String getHostNum() {
+        return hostNum;
+    }
+
+    public void setHostNum(String hostNum) {
+        this.hostNum = hostNum;
+    }
+
+    /** 身份证号 */
+    @Excel(name = "身份证号")
+    private String identity;
+
+
+    /** 主机号 */
+    @Excel(name = "主机号")
+    private String hostNum;
+
     /** 用户性别 */
     @Excel(name = "用户性别", readConverterExp = "0=男,1=女,2=未知")
     private String sex;
