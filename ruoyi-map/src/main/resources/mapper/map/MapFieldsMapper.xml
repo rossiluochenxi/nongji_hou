@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.map.mapper.MapFieldsMapper">
+    
+    <resultMap type="MapFields" id="MapFieldsResult">
+        <result property="id"    column="id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="fieldsName"    column="fields_name"    />
+        <result property="agriTypeId"    column="agri_type_id"    />
+        <result property="agriTypeCategory"    column="agri_type_category"    />
+        <result property="agriTypeType"    column="agri_type_type"    />
+        <result property="fieldsArea"    column="fields_area"    />
+        <result property="mapInfo"    column="map_info"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectMapFieldsVo">
+        select id, create_by, create_time, update_by, update_time, user_id, dept_id, fields_name, agri_type_id, agri_type_category, agri_type_type, fields_area, map_info, status from map_fields t
+    </sql>
+
+    <select id="selectMapFieldsList" parameterType="MapFields" resultMap="MapFieldsResult">
+        <include refid="selectMapFieldsVo"/>
+        <where>  
+            <if test="fieldsName != null  and fieldsName != ''"> and fields_name like concat('%', #{fieldsName}, '%')</if>
+            <if test="agriTypeCategory != null  and agriTypeCategory != ''"> and agri_type_category = #{agriTypeCategory}</if>
+            <if test="agriTypeType != null  and agriTypeType != ''"> and agri_type_type = #{agriTypeType}</if>
+            <if test="fieldsArea != null "> and fields_area = #{fieldsArea}</if>
+            <if test="mapInfo != null  and mapInfo != ''"> and map_info = #{mapInfo}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            ${params.dataScope}
+        </where>
+    </select>
+    
+    <select id="selectMapFieldsById" parameterType="String" resultMap="MapFieldsResult">
+        <include refid="selectMapFieldsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertMapFields" parameterType="MapFields">
+        insert into map_fields
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="fieldsName != null and fieldsName != ''">fields_name,</if>
+            <if test="agriTypeId != null and agriTypeId != ''">agri_type_id,</if>
+            <if test="agriTypeCategory != null and agriTypeCategory != ''">agri_type_category,</if>
+            <if test="agriTypeType != null and agriTypeType != ''">agri_type_type,</if>
+            <if test="fieldsArea != null">fields_area,</if>
+            <if test="mapInfo != null and mapInfo != ''">map_info,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="fieldsName != null and fieldsName != ''">#{fieldsName},</if>
+            <if test="agriTypeId != null and agriTypeId != ''">#{agriTypeId},</if>
+            <if test="agriTypeCategory != null and agriTypeCategory != ''">#{agriTypeCategory},</if>
+            <if test="agriTypeType != null and agriTypeType != ''">#{agriTypeType},</if>
+            <if test="fieldsArea != null">#{fieldsArea},</if>
+            <if test="mapInfo != null and mapInfo != ''">#{mapInfo},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMapFields" parameterType="MapFields">
+        update map_fields
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="fieldsName != null and fieldsName != ''">fields_name = #{fieldsName},</if>
+            <if test="agriTypeId != null and agriTypeId != ''">agri_type_id = #{agriTypeId},</if>
+            <if test="agriTypeCategory != null and agriTypeCategory != ''">agri_type_category = #{agriTypeCategory},</if>
+            <if test="agriTypeType != null and agriTypeType != ''">agri_type_type = #{agriTypeType},</if>
+            <if test="fieldsArea != null">fields_area = #{fieldsArea},</if>
+            <if test="mapInfo != null and mapInfo != ''">map_info = #{mapInfo},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMapFieldsById" parameterType="String">
+        delete from map_fields where id = #{id}
+    </delete>
+
+    <delete id="deleteMapFieldsByIds" parameterType="String">
+        delete from map_fields where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
