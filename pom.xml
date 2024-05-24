@@ -195,7 +195,17 @@
                 <artifactId>ruoyi-biz</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
+
+
+            <!-- 地图模块-->
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>ruoyi-map</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
         </dependencies>
+
+
     </dependencyManagement>
 
     <modules>
@@ -209,6 +219,7 @@
         <module>ruoyi-dm</module>
         <module>ruoyi-agri</module>
         <module>ruoyi-biz</module>
+        <module>ruoyi-map</module>
 
 
     </modules>
