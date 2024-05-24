@@ -1,7 +1,10 @@
 package com.ruoyi.agri.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.agri.mapper.ArgiMachineryMapper;
@@ -39,6 +42,7 @@ public class ArgiMachineryServiceImpl implements IArgiMachineryService
      * @return 农机管理
      */
     @Override
+    @DataScope(deptAlias = "t" ,userAlias = "t")
     public List<ArgiMachinery> selectArgiMachineryList(ArgiMachinery argiMachinery)
     {
         return argiMachineryMapper.selectArgiMachineryList(argiMachinery);
@@ -54,6 +58,7 @@ public class ArgiMachineryServiceImpl implements IArgiMachineryService
     public int insertArgiMachinery(ArgiMachinery argiMachinery)
     {
         argiMachinery.setCreateTime(DateUtils.getNowDate());
+        argiMachinery.setId(IdUtils.randomUUID());
         return argiMachineryMapper.insertArgiMachinery(argiMachinery);
     }
 

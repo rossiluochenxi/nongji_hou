@@ -77,6 +77,9 @@ public class ArgiMachineryController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody ArgiMachinery argiMachinery)
     {
+        argiMachinery.setCreateBy(getUsername());
+        argiMachinery.setUserId(getUserId().toString());
+        argiMachinery.setDeptId(getDeptId().toString());
         return toAjax(argiMachineryService.insertArgiMachinery(argiMachinery));
     }
 
@@ -88,6 +91,8 @@ public class ArgiMachineryController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody ArgiMachinery argiMachinery)
     {
+        argiMachinery.setUpdateBy(getUsername());
+
         return toAjax(argiMachineryService.updateArgiMachinery(argiMachinery));
     }
 

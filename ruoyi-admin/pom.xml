@@ -74,6 +74,10 @@
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-agri</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-biz</artifactId>
+        </dependency>
 
 
     </dependencies>

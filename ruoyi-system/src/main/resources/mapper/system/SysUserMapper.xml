@@ -13,6 +13,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="phonenumber"  column="phonenumber"  />
 		<result property="identity"  column="identity"  />
 		<result property="hostNum"  column="host_num"  />
+		<result property="argiMachineryId"  column="argi_machinery_id"  />
+
+
         <result property="sex"          column="sex"          />
         <result property="avatar"       column="avatar"       />
         <result property="password"     column="password"     />
@@ -158,7 +161,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="phonenumber != null and phonenumber != ''">phonenumber,</if>
 			<if test="identity != null and identity != ''">`identity`,</if>
 			<if test="hostNum != null and hostNum != ''">host_num,</if>
- 			<if test="sex != null and sex != ''">sex,</if>
+	     	<if test="argiMachineryId != null and argiMachineryId != ''">argi_machinery_id,</if>
+
+		    <if test="sex != null and sex != ''">sex,</if>
  			<if test="password != null and password != ''">password,</if>
  			<if test="status != null and status != ''">status,</if>
  			<if test="createBy != null and createBy != ''">create_by,</if>
@@ -174,7 +179,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="phonenumber != null and phonenumber != ''">#{phonenumber},</if>
 			<if test="identity != null and identity != ''">#{identity},</if>
 			<if test="hostNum != null and hostNum != ''">#{hostNum},</if>
- 			<if test="sex != null and sex != ''">#{sex},</if>
+		    <if test="argiMachineryId != null and argiMachineryId != ''">#{argiMachineryId},</if>
+            <if test="sex != null and sex != ''">#{sex},</if>
  			<if test="password != null and password != ''">#{password},</if>
  			<if test="status != null and status != ''">#{status},</if>
  			<if test="createBy != null and createBy != ''">#{createBy},</if>
@@ -191,8 +197,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="nickName != null and nickName != ''">nick_name = #{nickName},</if>
  			<if test="email != null ">email = #{email},</if>
  			<if test="phonenumber != null ">phonenumber = #{phonenumber},</if>
-			<if test="identity != null and identity != 0">`identity` = #{identity},</if>
-            <if test="hostNum != null and hostNum != 0">host_num = #{hostNum},</if>
+			<if test="identity != null ">`identity` = #{identity},</if>
+            <if test="hostNum != null ">host_num = #{hostNum},</if>
+			<if test="argiMachineryId != null ">argi_machinery_id= #{argiMachineryId},</if>
             <if test="sex != null and sex != ''">sex = #{sex},</if>
  			<if test="avatar != null and avatar != ''">avatar = #{avatar},</if>
  			<if test="password != null and password != ''">password = #{password},</if>

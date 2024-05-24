@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectArgiMachineryVo">
-        select id, create_by, create_time, update_by, update_time, user_id, dept_id, name, host_num, tasks_status, tasks_id, machinery_type, machinery_length from argi_machinery
+        select id, create_by, create_time, update_by, update_time, user_id, dept_id, name, host_num, tasks_status, tasks_id, machinery_type, machinery_length from argi_machinery t
     </sql>
 
     <select id="selectArgiMachineryList" parameterType="ArgiMachinery" resultMap="ArgiMachineryResult">
@@ -30,6 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="hostNum != null  and hostNum != ''"> and host_num like concat('%', #{hostNum}, '%')</if>
             <if test="machineryType != null  and machineryType != ''"> and machinery_type = #{machineryType}</if>
             <if test="machineryLength != null "> and machinery_length = #{machineryLength}</if>
+            ${params.dataScope}
         </where>
     </select>
     

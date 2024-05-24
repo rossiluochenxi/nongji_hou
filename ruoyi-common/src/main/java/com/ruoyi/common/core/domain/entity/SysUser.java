@@ -66,6 +66,18 @@ public class SysUser extends BaseEntity
     private String identity;
 
 
+
+    /** 农机id */
+    @Excel(name = "农机id")
+    private String argiMachineryId;
+    public String getArgiMachineryId() {
+        return argiMachineryId;
+    }
+
+    public void setArgiMachineryId(String argiMachineryId) {
+        this.argiMachineryId = argiMachineryId;
+    }
+
     /** 主机号 */
     @Excel(name = "主机号")
     private String hostNum;

@@ -2,6 +2,7 @@ package com.ruoyi.agri.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,14 +24,13 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 面积类型管理Controller
- * 
+ *
  * @author 罗晨熙
  * @date 2024-05-21
  */
 @RestController
 @RequestMapping("/agri/type")
-public class AgriTypeController extends BaseController
-{
+public class AgriTypeController extends BaseController {
     @Autowired
     private IAgriTypeService agriTypeService;
 
@@ -39,8 +39,7 @@ public class AgriTypeController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('agri:type:list')")
     @GetMapping("/list")
-    public TableDataInfo list(AgriType agriType)
-    {
+    public TableDataInfo list(AgriType agriType) {
         startPage();
         List<AgriType> list = agriTypeService.selectAgriTypeList(agriType);
         return getDataTable(list);
@@ -52,8 +51,7 @@ public class AgriTypeController extends BaseController
     @PreAuthorize("@ss.hasPermi('agri:type:export')")
     @Log(title = "面积类型管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, AgriType agriType)
-    {
+    public void export(HttpServletResponse response, AgriType agriType) {
         List<AgriType> list = agriTypeService.selectAgriTypeList(agriType);
         ExcelUtil<AgriType> util = new ExcelUtil<AgriType>(AgriType.class);
         util.exportExcel(response, list, "面积类型管理数据");
@@ -64,8 +62,7 @@ public class AgriTypeController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('agri:type:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") String id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") String id) {
         return success(agriTypeService.selectAgriTypeById(id));
     }
 
@@ -75,8 +72,10 @@ public class AgriTypeController extends BaseController
     @PreAuthorize("@ss.hasPermi('agri:type:add')")
     @Log(title = "面积类型管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody AgriType agriType)
-    {
+    public AjaxResult add(@RequestBody AgriType agriType) {
+        agriType.setCreateBy(getUsername());
+        agriType.setUserId(getUserId().toString());
+        agriType.setDeptId(getDeptId().toString());
         return toAjax(agriTypeService.insertAgriType(agriType));
     }
 
@@ -86,9 +85,10 @@ public class AgriTypeController extends BaseController
     @PreAuthorize("@ss.hasPermi('agri:type:edit')")
     @Log(title = "面积类型管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody AgriType agriType)
-    {
-        return toAjax(agriTypeService.updateAgriType(agriType));
+    public AjaxResult edit(@RequestBody AgriType agriType) {
+        agriType.setUpdateBy(getUsername());
+        return toAjax(agriTypeService.updateAgriType(agriType)
+        );
     }
 
     /**
@@ -96,9 +96,8 @@ public class AgriTypeController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('agri:type:remove')")
     @Log(title = "面积类型管理", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable String[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable String[] ids) {
         return toAjax(agriTypeService.deleteAgriTypeByIds(ids));
     }
 }

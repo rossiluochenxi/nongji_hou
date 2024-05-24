@@ -1,7 +1,10 @@
 package com.ruoyi.agri.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.agri.mapper.AgriTypeMapper;
@@ -39,7 +42,8 @@ public class AgriTypeServiceImpl implements IAgriTypeService
      * @return 面积类型管理
      */
     @Override
-    public List<AgriType> selectAgriTypeList(AgriType agriType)
+    @DataScope(deptAlias = "t" ,userAlias = "t")
+     public List<AgriType> selectAgriTypeList(AgriType agriType)
     {
         return agriTypeMapper.selectAgriTypeList(agriType);
     }
@@ -54,6 +58,7 @@ public class AgriTypeServiceImpl implements IAgriTypeService
     public int insertAgriType(AgriType agriType)
     {
         agriType.setCreateTime(DateUtils.getNowDate());
+        agriType.setId(IdUtils.randomUUID());
         return agriTypeMapper.insertAgriType(agriType);
     }
 
