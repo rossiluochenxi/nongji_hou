@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.biz.mapper.BizTasksSerialMapper">
+    
+    <resultMap type="BizTasksSerial" id="BizTasksSerialResult">
+        <result property="id"    column="id"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="bizTasks"    column="biz_tasks"    />
+        <result property="bizName"    column="biz_name"    />
+        <result property="agriFarmerId"    column="agri_farmer_id"    />
+        <result property="agriFieldsId"    column="agri_fields_id"    />
+        <result property="agriFieldsName"    column="agri_fields_name"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="tasksSerialNum"    column="tasks_serial_num"    />
+        <result property="deviceDataId"    column="device_data_id"    />
+        <result property="agriFarmerName"    column="agri_farmer_name"    />
+    </resultMap>
+
+    <sql id="selectBizTasksSerialVo">
+        select id, create_by, create_time, update_by, update_time, user_id, dept_id, biz_tasks, biz_name, agri_farmer_id, agri_fields_id, agri_fields_name, start_time, end_time, tasks_serial_num, device_data_id, agri_farmer_name from biz_tasks_serial t
+    </sql>
+
+    <select id="selectBizTasksSerialList" parameterType="BizTasksSerial" resultMap="BizTasksSerialResult">
+        <include refid="selectBizTasksSerialVo"/>
+        <where>  
+            <if test="bizName != null  and bizName != ''"> and biz_name like concat('%', #{bizName}, '%')</if>
+            <if test="agriFieldsName != null  and agriFieldsName != ''"> and agri_fields_name like concat('%', #{agriFieldsName}, '%')</if>
+            <if test="startTime != null "> and start_time = #{startTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="tasksSerialNum != null  and tasksSerialNum != ''"> and tasks_serial_num = #{tasksSerialNum}</if>
+            <if test="agriFarmerName != null  and agriFarmerName != ''"> and agri_farmer_name like concat('%', #{agriFarmerName}, '%')</if>
+            ${params.dataScope}
+        </where>
+    </select>
+    
+    <select id="selectBizTasksSerialById" parameterType="String" resultMap="BizTasksSerialResult">
+        <include refid="selectBizTasksSerialVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBizTasksSerial" parameterType="BizTasksSerial">
+        insert into biz_tasks_serial
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="bizTasks != null">biz_tasks,</if>
+            <if test="bizName != null">biz_name,</if>
+            <if test="agriFarmerId != null">agri_farmer_id,</if>
+            <if test="agriFieldsId != null">agri_fields_id,</if>
+            <if test="agriFieldsName != null">agri_fields_name,</if>
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="tasksSerialNum != null">tasks_serial_num,</if>
+            <if test="deviceDataId != null">device_data_id,</if>
+            <if test="agriFarmerName != null">agri_farmer_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="bizTasks != null">#{bizTasks},</if>
+            <if test="bizName != null">#{bizName},</if>
+            <if test="agriFarmerId != null">#{agriFarmerId},</if>
+            <if test="agriFieldsId != null">#{agriFieldsId},</if>
+            <if test="agriFieldsName != null">#{agriFieldsName},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="tasksSerialNum != null">#{tasksSerialNum},</if>
+            <if test="deviceDataId != null">#{deviceDataId},</if>
+            <if test="agriFarmerName != null">#{agriFarmerName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBizTasksSerial" parameterType="BizTasksSerial">
+        update biz_tasks_serial
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="bizTasks != null">biz_tasks = #{bizTasks},</if>
+            <if test="bizName != null">biz_name = #{bizName},</if>
+            <if test="agriFarmerId != null">agri_farmer_id = #{agriFarmerId},</if>
+            <if test="agriFieldsId != null">agri_fields_id = #{agriFieldsId},</if>
+            <if test="agriFieldsName != null">agri_fields_name = #{agriFieldsName},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="tasksSerialNum != null">tasks_serial_num = #{tasksSerialNum},</if>
+            <if test="deviceDataId != null">device_data_id = #{deviceDataId},</if>
+            <if test="agriFarmerName != null">agri_farmer_name = #{agriFarmerName},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBizTasksSerialById" parameterType="String">
+        delete from biz_tasks_serial where id = #{id}
+    </delete>
+
+    <delete id="deleteBizTasksSerialByIds" parameterType="String">
+        delete from biz_tasks_serial where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
