@@ -74,6 +74,32 @@ public class SysUserServiceImpl implements ISysUserService
         return userMapper.selectUserList(user);
     }
 
+
+
+    /**
+     * 不分页查询用户列表并过滤掉自己
+     *
+     * @param userId 用户信息
+     * @return 用户信息集合信息
+     */
+    @Override
+    @DataScope(deptAlias = "d", userAlias = "u")
+    public List<SysUser> selectUserListGL(String userId) {
+        SysUser user = new SysUser();
+        // user.setUserId(Long.valueOf(userId));
+        List<SysUser> sc = new ArrayList<>();
+        List<SysUser> guoLv = userMapper.selectUserList(user);
+
+        for (SysUser sysUser : guoLv) {
+            if (!sysUser.getUserId().equals(Long.valueOf(userId))) {
+                sc.add(sysUser);
+            }
+        }
+
+        return sc;
+    }
+
+
     /**
      * 根据条件分页查询已分配用户角色列表
      * 

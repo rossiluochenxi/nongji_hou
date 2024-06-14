@@ -19,6 +19,13 @@ public interface ISysUserService
     public List<SysUser> selectUserList(SysUser user);
 
     /**
+     * 不分页查询用户列表并过滤掉自己
+     *
+     * @param userId 用户信息id
+     * @return 用户信息集合信息
+     */
+    public List<SysUser> selectUserListGL(String  userId);
+    /**
      * 根据条件分页查询已分配用户角色列表
      * 
      * @param user 用户信息

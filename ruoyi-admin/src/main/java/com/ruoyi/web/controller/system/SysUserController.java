@@ -72,7 +72,9 @@ public class SysUserController extends BaseController
     @GetMapping("/listUserQuery")
     public TableDataInfo listQuery(SysUser user)
     {
-        List<SysUser> list = userService.selectUserList(user);
+        String userId=getUserId().toString();
+
+        List<SysUser> list = userService.selectUserListGL(userId);
         return getDataTable(list);
     }
 
