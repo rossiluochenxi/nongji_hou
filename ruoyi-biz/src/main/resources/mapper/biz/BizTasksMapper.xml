@@ -21,10 +21,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="status"    column="status"    />
         <result property="serialNum"    column="serial_num"    />
         <result property="bizName"    column="biz_name"    />
+        <result property="agriTypeId"    column="agri_type_id"    />
+        <result property="agriTypeCategory"    column="agri_type_category"    />
+        <result property="agriTypeType"    column="agri_type_type"    />
     </resultMap>
 
     <sql id="selectBizTasksVo">
-        select id, create_by, create_time, update_by, update_time, user_id, dept_id, agri_farmer_id, agri_farmer_name, agri_fields_id, agri_fields_name, start_time, end_time, status, serial_num, biz_name from biz_tasks t
+        select id, create_by, create_time, update_by, update_time, user_id, dept_id, agri_farmer_id, agri_farmer_name, agri_fields_id, agri_fields_name, start_time, end_time, status, serial_num, biz_name ,agri_type_id, agri_type_category, agri_type_type from biz_tasks t
     </sql>
 
     <select id="selectBizTasksList" parameterType="BizTasks" resultMap="BizTasksResult">
@@ -64,6 +67,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">status,</if>
             <if test="serialNum != null">serial_num,</if>
             <if test="bizName != null">biz_name,</if>
+            <if test="agriTypeId != null and agriTypeId != ''">agri_type_id,</if>
+            <if test="agriTypeCategory != null and agriTypeCategory != ''">agri_type_category,</if>
+            <if test="agriTypeType != null and agriTypeType != ''">agri_type_type,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -82,6 +88,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">#{status},</if>
             <if test="serialNum != null">#{serialNum},</if>
             <if test="bizName != null">#{bizName},</if>
+            <if test="agriTypeId != null and agriTypeId != ''">#{agriTypeId},</if>
+            <if test="agriTypeCategory != null and agriTypeCategory != ''">#{agriTypeCategory},</if>
+            <if test="agriTypeType != null and agriTypeType != ''">#{agriTypeType},</if>
          </trim>
     </insert>
 
@@ -103,6 +112,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">status = #{status},</if>
             <if test="serialNum != null">serial_num = #{serialNum},</if>
             <if test="bizName != null">biz_name = #{bizName},</if>
+            <if test="agriTypeId != null and agriTypeId != ''">agri_type_id = #{agriTypeId},</if>
+            <if test="agriTypeCategory != null and agriTypeCategory != ''">agri_type_category = #{agriTypeCategory},</if>
+            <if test="agriTypeType != null and agriTypeType != ''">agri_type_type = #{agriTypeType},</if>
         </trim>
         where id = #{id}
     </update>

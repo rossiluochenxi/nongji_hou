@@ -46,6 +46,28 @@ public class AgriTypeController extends BaseController {
     }
 
     /**
+     * 查询面积类型管理列表(不分页)
+     */
+    @PreAuthorize("@ss.hasPermi('agri:type:list')")
+    @GetMapping("/listTypeQuery")
+    public TableDataInfo listTypeQuery(AgriType agriType) {
+        List<AgriType> list = agriTypeService.selectAgriTypeList(agriType);
+        return getDataTable(list);
+    }
+
+    /**
+     * 查询面积类型管理列表
+     */
+
+    @PreAuthorize("@ss.hasPermi('agri:type:list')")
+    @GetMapping("/querylist")
+    public TableDataInfo querylist(AgriType agriType) {
+        List<AgriType> list = agriTypeService.selectAgriTypeList(agriType);
+        return getDataTable(list);
+    }
+
+
+    /**
      * 导出面积类型管理列表
      */
     @PreAuthorize("@ss.hasPermi('agri:type:export')")

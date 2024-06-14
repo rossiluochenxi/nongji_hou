@@ -64,6 +64,41 @@ public class BizTasksSerial extends BaseEntity
     @Excel(name = "农机主")
     private String agriFarmerName;
 
+    /** 耕地类型id */
+    private String agriTypeId;
+
+    public String getAgriTypeId() {
+        return agriTypeId;
+    }
+
+    public void setAgriTypeId(String agriTypeId) {
+        this.agriTypeId = agriTypeId;
+    }
+
+    public String getAgriTypeCategory() {
+        return agriTypeCategory;
+    }
+
+    public void setAgriTypeCategory(String agriTypeCategory) {
+        this.agriTypeCategory = agriTypeCategory;
+    }
+
+    public String getAgriTypeType() {
+        return agriTypeType;
+    }
+
+    public void setAgriTypeType(String agriTypeType) {
+        this.agriTypeType = agriTypeType;
+    }
+
+    /** 耕地类别 */
+    @Excel(name = "耕地类别")
+    private String agriTypeCategory;
+
+    /** 耕地类型 */
+    @Excel(name = "耕地类型")
+    private String agriTypeType;
+
     public void setId(String id) 
     {
         this.id = id;

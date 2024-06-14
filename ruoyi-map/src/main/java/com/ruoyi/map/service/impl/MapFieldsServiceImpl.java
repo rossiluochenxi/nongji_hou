@@ -30,7 +30,6 @@ public class MapFieldsServiceImpl implements IMapFieldsService
      * @return 任务耕地信息
      */
     @Override
-    @DataScope(deptAlias = "t" ,userAlias = "t")
     public MapFields selectMapFieldsById(String id)
     {
         return mapFieldsMapper.selectMapFieldsById(id);
@@ -43,6 +42,7 @@ public class MapFieldsServiceImpl implements IMapFieldsService
      * @return 任务耕地信息
      */
     @Override
+    @DataScope(deptAlias = "t" ,userAlias = "t")
     public List<MapFields> selectMapFieldsList(MapFields mapFields)
     {
         return mapFieldsMapper.selectMapFieldsList(mapFields);

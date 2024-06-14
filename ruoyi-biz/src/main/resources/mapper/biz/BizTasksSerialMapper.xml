@@ -22,10 +22,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="tasksSerialNum"    column="tasks_serial_num"    />
         <result property="deviceDataId"    column="device_data_id"    />
         <result property="agriFarmerName"    column="agri_farmer_name"    />
+        <result property="agriTypeId"    column="agri_type_id"    />
+        <result property="agriTypeCategory"    column="agri_type_category"    />
+        <result property="agriTypeType"    column="agri_type_type"    />
     </resultMap>
 
     <sql id="selectBizTasksSerialVo">
-        select id, create_by, create_time, update_by, update_time, user_id, dept_id, biz_tasks, biz_name, agri_farmer_id, agri_fields_id, agri_fields_name, start_time, end_time, tasks_serial_num, device_data_id, agri_farmer_name from biz_tasks_serial t
+        select id, create_by, create_time, update_by, update_time, user_id, dept_id, biz_tasks, biz_name, agri_farmer_id, agri_fields_id, agri_fields_name, start_time, end_time, tasks_serial_num, device_data_id, agri_farmer_name ,agri_type_id, agri_type_category, agri_type_type from biz_tasks_serial t
     </sql>
 
     <select id="selectBizTasksSerialList" parameterType="BizTasksSerial" resultMap="BizTasksSerialResult">
@@ -66,6 +69,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="tasksSerialNum != null">tasks_serial_num,</if>
             <if test="deviceDataId != null">device_data_id,</if>
             <if test="agriFarmerName != null">agri_farmer_name,</if>
+            <if test="agriTypeId != null and agriTypeId != ''">agri_type_id,</if>
+            <if test="agriTypeCategory != null and agriTypeCategory != ''">agri_type_category,</if>
+            <if test="agriTypeType != null and agriTypeType != ''">agri_type_type,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -85,6 +91,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="tasksSerialNum != null">#{tasksSerialNum},</if>
             <if test="deviceDataId != null">#{deviceDataId},</if>
             <if test="agriFarmerName != null">#{agriFarmerName},</if>
+            <if test="agriTypeId != null and agriTypeId != ''">#{agriTypeId},</if>
+            <if test="agriTypeCategory != null and agriTypeCategory != ''">#{agriTypeCategory},</if>
+            <if test="agriTypeType != null and agriTypeType != ''">#{agriTypeType},</if>
          </trim>
     </insert>
 
@@ -107,6 +116,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="tasksSerialNum != null">tasks_serial_num = #{tasksSerialNum},</if>
             <if test="deviceDataId != null">device_data_id = #{deviceDataId},</if>
             <if test="agriFarmerName != null">agri_farmer_name = #{agriFarmerName},</if>
+            <if test="agriTypeId != null and agriTypeId != ''">agri_type_id = #{agriTypeId},</if>
+            <if test="agriTypeCategory != null and agriTypeCategory != ''">agri_type_category = #{agriTypeCategory},</if>
+            <if test="agriTypeType != null and agriTypeType != ''">agri_type_type = #{agriTypeType},</if>
         </trim>
         where id = #{id}
     </update>

@@ -46,6 +46,18 @@ public class ArgiMachineryController extends BaseController
         return getDataTable(list);
     }
 
+
+    /**
+     * 查询农机管理列表
+     */
+    @PreAuthorize("@ss.hasPermi('agri:machinery:list')")
+    @GetMapping("/listMachineryQuery")
+    public TableDataInfo listMachineryQuery(ArgiMachinery argiMachinery)
+    {
+        List<ArgiMachinery> list = argiMachineryService.selectArgiMachineryList(argiMachinery);
+        return getDataTable(list);
+    }
+
     /**
      * 导出农机管理列表
      */
