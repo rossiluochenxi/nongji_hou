@@ -46,6 +46,18 @@ public class MapFieldsController extends BaseController
         return getDataTable(list);
     }
 
+
+    /**
+     * 查询任务耕地信息列表（不分页）
+     */
+    @PreAuthorize("@ss.hasPermi('map:fields:list')")
+    @GetMapping("/listFieldsQuery")
+    public TableDataInfo listFieldsQuery(MapFields mapFields)
+    {
+        List<MapFields> list = mapFieldsService.selectMapFieldsList(mapFields);
+        return getDataTable(list);
+    }
+
     /**
      * 导出任务耕地信息列表
      */

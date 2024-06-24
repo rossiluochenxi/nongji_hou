@@ -79,8 +79,8 @@ public class BizTasksController extends BaseController
     {
 
         bizTasks.setCreateBy(getUsername());
-        bizTasks.setUserId(getUserId().toString());
-        bizTasks.setDeptId(getDeptId().toString());
+//        bizTasks.setUserId(getUserId().toString());
+//        bizTasks.setDeptId(getDeptId().toString());
         return toAjax(bizTasksService.insertBizTasks(bizTasks));
     }
 

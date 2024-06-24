@@ -2,8 +2,10 @@ package com.ruoyi.biz.service.impl;
 
 import java.util.List;
 
+import com.ruoyi.biz.domain.BizTasksAssignments;
 import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.bean.BeanUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,8 @@ public class BizTasksServiceImpl implements IBizTasksService
 {
     @Autowired
     private BizTasksMapper bizTasksMapper;
+    @Autowired
+    private BizTasksAssignmentsServiceImpl bizTasksAssignmentsServiceImpl;
 
     /**
      * 查询业务任务
@@ -57,9 +61,14 @@ public class BizTasksServiceImpl implements IBizTasksService
     @Override
     public int insertBizTasks(BizTasks bizTasks)
     {
-        bizTasks.setCreateTime(DateUtils.getNowDate());
         bizTasks.setId(IdUtils.randomUUID());
-        return bizTasksMapper.insertBizTasks(bizTasks);
+        BizTasksAssignments bizTasksAssignments = new BizTasksAssignments();
+        BeanUtils.copyProperties(bizTasks,bizTasksAssignments);
+        bizTasksAssignments.setBizTasksId(bizTasks.getId());
+        bizTasksAssignments.setBizTasksName(bizTasks.getBizName());
+        bizTasksAssignmentsServiceImpl.insertBizTasksAssignments(bizTasksAssignments);
+        bizTasks.setCreateTime(DateUtils.getNowDate());
+         return bizTasksMapper.insertBizTasks(bizTasks);
     }
 
     /**
