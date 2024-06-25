@@ -11,9 +11,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="nickName"     column="nick_name"    />
         <result property="email"        column="email"        />
         <result property="phonenumber"  column="phonenumber"  />
-		<result property="identity"  column="identity"  />
-		<result property="hostNum"  column="host_num"  />
-		<result property="argiMachineryId"  column="argi_machinery_id"  />
+<!--		<result property="identity"  column="identity"  />-->
+<!--		<result property="hostNum"  column="host_num"  />-->
+<!--		<result property="argiMachineryId"  column="argi_machinery_id"  />-->
 
 
         <result property="sex"          column="sex"          />
@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 	
 	<sql id="selectUserVo">
-        select u.user_id, u.dept_id, u.user_name, u.nick_name, u.email, u.avatar, u.phonenumber,u.identity,u.host_num, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark,
+        select u.user_id, u.dept_id, u.user_name, u.nick_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark,
         d.dept_id, d.parent_id, d.ancestors, d.dept_name, d.order_num, d.leader, d.status as dept_status,
         r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope, r.status as role_status
         from sys_user u
@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectUserList" parameterType="SysUser" resultMap="SysUserResult">
-		select u.user_id, u.dept_id, u.nick_name, u.user_name, u.email, u.avatar, u.phonenumber,u.identity,u.host_num, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader from sys_user u
+		select u.user_id, u.dept_id, u.nick_name, u.user_name, u.email, u.avatar, u.phonenumber, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader from sys_user u
 		left join sys_dept d on u.dept_id = d.dept_id
 		where u.del_flag = '0'
 		<if test="userId != null and userId != 0">
@@ -74,9 +74,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="status != null and status != ''">
 			AND u.status = #{status}
 		</if>
-		<if test="hostNum != null and hostNum != ''">
-			AND u.host_num like concat('%', #{hostNum}, '%')
-		</if>
+<!--		<if test="hostNum != null and hostNum != ''">-->
+<!--			AND u.host_num like concat('%', #{hostNum}, '%')-->
+<!--		</if>-->
 		<if test="phonenumber != null and phonenumber != ''">
 			AND u.phonenumber like concat('%', #{phonenumber}, '%')
 		</if>
@@ -94,7 +94,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectAllocatedList" parameterType="SysUser" resultMap="SysUserResult">
-	    select distinct u.user_id, u.dept_id, u.user_name, u.nick_name, u.email, u.phonenumber, u.identity,u.host_num,u.status, u.create_time
+	    select distinct u.user_id, u.dept_id, u.user_name, u.nick_name, u.email, u.phonenumber,u.status, u.create_time
 	    from sys_user u
 			 left join sys_dept d on u.dept_id = d.dept_id
 			 left join sys_user_role ur on u.user_id = ur.user_id
@@ -111,7 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectUnallocatedList" parameterType="SysUser" resultMap="SysUserResult">
-	    select distinct u.user_id, u.dept_id, u.user_name, u.nick_name, u.email, u.phonenumber,u.identity,u.host_num, u.status, u.create_time
+	    select distinct u.user_id, u.dept_id, u.user_name, u.nick_name, u.email, u.phonenumber, u.status, u.create_time
 	    from sys_user u
 			 left join sys_dept d on u.dept_id = d.dept_id
 			 left join sys_user_role ur on u.user_id = ur.user_id
@@ -159,9 +159,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="email != null and email != ''">email,</if>
  			<if test="avatar != null and avatar != ''">avatar,</if>
  			<if test="phonenumber != null and phonenumber != ''">phonenumber,</if>
-			<if test="identity != null and identity != ''">`identity`,</if>
-			<if test="hostNum != null and hostNum != ''">host_num,</if>
-	     	<if test="argiMachineryId != null and argiMachineryId != ''">argi_machinery_id,</if>
+<!--			<if test="identity != null and identity != ''">`identity`,</if>-->
+<!--			<if test="hostNum != null and hostNum != ''">host_num,</if>-->
+<!--	     	<if test="argiMachineryId != null and argiMachineryId != ''">argi_machinery_id,</if>-->
 
 		    <if test="sex != null and sex != ''">sex,</if>
  			<if test="password != null and password != ''">password,</if>
@@ -177,9 +177,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="email != null and email != ''">#{email},</if>
  			<if test="avatar != null and avatar != ''">#{avatar},</if>
  			<if test="phonenumber != null and phonenumber != ''">#{phonenumber},</if>
-			<if test="identity != null and identity != ''">#{identity},</if>
-			<if test="hostNum != null and hostNum != ''">#{hostNum},</if>
-		    <if test="argiMachineryId != null and argiMachineryId != ''">#{argiMachineryId},</if>
+<!--			<if test="identity != null and identity != ''">#{identity},</if>-->
+<!--			<if test="hostNum != null and hostNum != ''">#{hostNum},</if>-->
+<!--		    <if test="argiMachineryId != null and argiMachineryId != ''">#{argiMachineryId},</if>-->
             <if test="sex != null and sex != ''">#{sex},</if>
  			<if test="password != null and password != ''">#{password},</if>
  			<if test="status != null and status != ''">#{status},</if>
@@ -197,9 +197,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="nickName != null and nickName != ''">nick_name = #{nickName},</if>
  			<if test="email != null ">email = #{email},</if>
  			<if test="phonenumber != null ">phonenumber = #{phonenumber},</if>
-			<if test="identity != null ">`identity` = #{identity},</if>
-            <if test="hostNum != null ">host_num = #{hostNum},</if>
-			<if test="argiMachineryId != null ">argi_machinery_id= #{argiMachineryId},</if>
+<!--			<if test="identity != null ">`identity` = #{identity},</if>-->
+<!--            <if test="hostNum != null ">host_num = #{hostNum},</if>-->
+<!--			<if test="argiMachineryId != null ">argi_machinery_id= #{argiMachineryId},</if>-->
             <if test="sex != null and sex != ''">sex = #{sex},</if>
  			<if test="avatar != null and avatar != ''">avatar = #{avatar},</if>
  			<if test="password != null and password != ''">password = #{password},</if>

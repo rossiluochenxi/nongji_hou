@@ -18,10 +18,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="tasksId"    column="tasks_id"    />
         <result property="machineryType"    column="machinery_type"    />
         <result property="machineryLength"    column="machinery_length"    />
+
+        <result property="machineryTypeId"    column="machinery_type_id"    />
+        <result property="machineryWidth"    column="machinery_width"    />
+        <result property="machineryNo"    column="machinery_no"    />
+        <result property="machineryBrand"    column="machinery_brand"    />
+        <result property="machineryHp"    column="machinery_hp"    />
+        <result property="userMachineryId"    column="user_machinery_id"    />
+
+
+
     </resultMap>
 
     <sql id="selectArgiMachineryVo">
-        select id, create_by, create_time, update_by, update_time, user_id, dept_id, name, host_num, tasks_status, tasks_id, machinery_type, machinery_length from argi_machinery t
+        select id, create_by, create_time, update_by, update_time, user_id, dept_id, name, host_num, tasks_status, tasks_id, machinery_type, machinery_length,machinery_type_id,machinery_width,machinery_no,machinery_brand,machinery_hp,user_machinery_id from argi_machinery t
     </sql>
 
     <select id="selectArgiMachineryList" parameterType="ArgiMachinery" resultMap="ArgiMachineryResult">
@@ -55,6 +65,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="tasksId != null">tasks_id,</if>
             <if test="machineryType != null">machinery_type,</if>
             <if test="machineryLength != null">machinery_length,</if>
+
+            <if test="machineryTypeId != null">machinery_type_id,</if>
+            <if test="machineryWidth != null">machinery_width,</if>
+            <if test="machineryNo != null">machinery_no,</if>
+            <if test="machineryBrand != null">machinery_brand,</if>
+            <if test="machineryHp != null">machinery_hp,</if>
+            <if test="userMachineryId != null">user_machinery_id,</if>
+
+
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -70,6 +89,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="tasksId != null">#{tasksId},</if>
             <if test="machineryType != null">#{machineryType},</if>
             <if test="machineryLength != null">#{machineryLength},</if>
+
+            <if test="machineryTypeId != null">#{machineryTypeId},</if>
+            <if test="machineryWidth != null">#{machineryWidth},</if>
+            <if test="machineryNo != null">#{machineryNo},</if>
+            <if test="machineryBrand != null">#{machineryBrand},</if>
+            <if test="machineryHp != null">#{machineryHp},</if>
+            <if test="userMachineryId != null">#{userMachineryId},</if>
          </trim>
     </insert>
 
@@ -88,6 +114,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="tasksId != null">tasks_id = #{tasksId},</if>
             <if test="machineryType != null">machinery_type = #{machineryType},</if>
             <if test="machineryLength != null">machinery_length = #{machineryLength},</if>
+
+
+            <if test="machineryTypeId != null">machinery_type_id = #{machineryTypeId},</if>
+            <if test="machineryWidth != null">machinery_width = #{machineryWidth},</if>
+            <if test="machineryNo != null">machinery_no = #{machineryNo},</if>
+            <if test="machineryBrand != null">machinery_brand = #{machineryBrand},</if>
+            <if test="machineryHp != null">machinery_hp = #{machineryHp},</if>
+            <if test="userMachineryId != null">user_machinery_id = #{userMachineryId},</if>
+
+
+
         </trim>
         where id = #{id}
     </update>

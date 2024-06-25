@@ -46,6 +46,78 @@ public class ArgiMachinery extends BaseEntity
     @Excel(name = "农机长度")
     private BigDecimal machineryLength;
 
+    public BigDecimal getMachineryWidth() {
+        return machineryWidth;
+    }
+
+    public void setMachineryWidth(BigDecimal machineryWidth) {
+        this.machineryWidth = machineryWidth;
+    }
+
+    public String getMachineryTypeId() {
+        return machineryTypeId;
+    }
+
+    public void setMachineryTypeId(String machineryTypeId) {
+        this.machineryTypeId = machineryTypeId;
+    }
+
+    public String getMachineryNo() {
+        return machineryNo;
+    }
+
+    public void setMachineryNo(String machineryNo) {
+        this.machineryNo = machineryNo;
+    }
+
+    public String getMachineryBrand() {
+        return machineryBrand;
+    }
+
+    public void setMachineryBrand(String machineryBrand) {
+        this.machineryBrand = machineryBrand;
+    }
+
+    public String getMachineryHp() {
+        return machineryHp;
+    }
+
+    public void setMachineryHp(String machineryHp) {
+        this.machineryHp = machineryHp;
+    }
+
+    public String getUserMachineryId() {
+        return userMachineryId;
+    }
+
+    public void setUserMachineryId(String userMachineryId) {
+        this.userMachineryId = userMachineryId;
+    }
+
+    /** 农机宽度 */
+    @Excel(name = "农机宽度")
+    private BigDecimal machineryWidth;
+
+    /** 农机类型id */
+    @Excel(name = "农机类型id")
+    private String machineryTypeId;
+
+    /** 农机编号 */
+    @Excel(name = "农机编号")
+    private String machineryNo;
+
+    /** 农机品牌 */
+    @Excel(name = "农机品牌")
+    private String machineryBrand;
+
+    /** 农机马力 */
+    @Excel(name = "农机马力")
+    private String machineryHp;
+
+    /** 所属农机主 */
+    @Excel(name = "所属农机主")
+    private String userMachineryId;
+
     public void setId(String id) 
     {
         this.id = id;
