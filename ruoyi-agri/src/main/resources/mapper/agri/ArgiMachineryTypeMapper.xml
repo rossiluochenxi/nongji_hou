@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.agri.mapper.ArgiMachineryTypeMapper">
+    
+    <resultMap type="ArgiMachineryType" id="ArgiMachineryTypeResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="typeNo"    column="type_no"    />
+        <result property="typeName"    column="type_name"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectArgiMachineryTypeVo">
+        select id, user_id, dept_id, type_no, type_name, create_by, create_time, update_by, update_time from argi_machinery_type
+    </sql>
+
+    <select id="selectArgiMachineryTypeList" parameterType="ArgiMachineryType" resultMap="ArgiMachineryTypeResult">
+        <include refid="selectArgiMachineryTypeVo"/>
+        <where>  
+            <if test="typeName != null  and typeName != ''"> and type_name like concat('%', #{typeName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectArgiMachineryTypeById" parameterType="String" resultMap="ArgiMachineryTypeResult">
+        <include refid="selectArgiMachineryTypeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertArgiMachineryType" parameterType="ArgiMachineryType">
+        insert into argi_machinery_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="typeNo != null">type_no,</if>
+            <if test="typeName != null and typeName != ''">type_name,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="typeNo != null">#{typeNo},</if>
+            <if test="typeName != null and typeName != ''">#{typeName},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateArgiMachineryType" parameterType="ArgiMachineryType">
+        update argi_machinery_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="typeNo != null">type_no = #{typeNo},</if>
+            <if test="typeName != null and typeName != ''">type_name = #{typeName},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteArgiMachineryTypeById" parameterType="String">
+        delete from argi_machinery_type where id = #{id}
+    </delete>
+
+    <delete id="deleteArgiMachineryTypeByIds" parameterType="String">
+        delete from argi_machinery_type where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
