@@ -45,6 +45,7 @@ public class AgriTypeServiceImpl implements IAgriTypeService
     @DataScope(deptAlias = "t" ,userAlias = "t")
      public List<AgriType> selectAgriTypeList(AgriType agriType)
     {
+        System.out.println("我是大博");
         return agriTypeMapper.selectAgriTypeList(agriType);
     }
 
