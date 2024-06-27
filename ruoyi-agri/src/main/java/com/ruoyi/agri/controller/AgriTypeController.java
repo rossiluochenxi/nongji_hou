@@ -40,6 +40,7 @@ public class AgriTypeController extends BaseController {
     @PreAuthorize("@ss.hasPermi('agri:type:list')")
     @GetMapping("/list")
     public TableDataInfo list(AgriType agriType) {
+        System.out.println("测试一下git互通否");
         startPage();
         List<AgriType> list = agriTypeService.selectAgriTypeList(agriType);
         return getDataTable(list);
