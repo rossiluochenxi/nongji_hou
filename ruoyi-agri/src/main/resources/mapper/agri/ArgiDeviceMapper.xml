@@ -18,10 +18,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="deviceType"    column="device_type"    />
         <result property="deviceStatus"    column="device_status"    />
         <result property="argiMachineryId"    column="argi_machinery_id"    />
+        <result property="argiMachineryName"    column="argi_machinery_name"    />
+
     </resultMap>
 
     <sql id="selectArgiDeviceVo">
-        select id, user_id, dept_id, create_by, create_time, update_by, update_time, device_no, device_name, device_type_id, device_type, device_status, argi_machinery_id from argi_device
+        select id, user_id, dept_id, create_by, create_time, update_by, update_time, device_no, device_name, device_type_id, device_type, device_status, argi_machinery_id,argi_machinery_name from argi_device
     </sql>
 
     <select id="selectArgiDeviceList" parameterType="ArgiDevice" resultMap="ArgiDeviceResult">
@@ -32,6 +34,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="deviceType != null  and deviceType != ''"> and device_type = #{deviceType}</if>
             <if test="deviceStatus != null  and deviceStatus != ''"> and device_status = #{deviceStatus}</if>
             <if test="argiMachineryId != null  and argiMachineryId != ''"> and argi_machinery_id = #{argiMachineryId}</if>
+            <if test="argiMachineryName != null  and argiMachineryName != ''"> and argi_machinery_name = #{argiMachineryName}</if>
+
         </where>
     </select>
     
@@ -56,7 +60,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="deviceType != null and deviceType != ''">device_type,</if>
             <if test="deviceStatus != null and deviceStatus != ''">device_status,</if>
             <if test="argiMachineryId != null">argi_machinery_id,</if>
-         </trim>
+            <if test="argiMachineryName != null">argi_machinery_Name,</if>
+
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
             <if test="userId != null">#{userId},</if>
@@ -71,6 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="deviceType != null and deviceType != ''">#{deviceType},</if>
             <if test="deviceStatus != null and deviceStatus != ''">#{deviceStatus},</if>
             <if test="argiMachineryId != null">#{argiMachineryId},</if>
+            <if test="argiMachineryName != null">#{argiMachineryName},</if>
          </trim>
     </insert>
 
@@ -89,6 +96,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="deviceType != null and deviceType != ''">device_type = #{deviceType},</if>
             <if test="deviceStatus != null and deviceStatus != ''">device_status = #{deviceStatus},</if>
             <if test="argiMachineryId != null">argi_machinery_id = #{argiMachineryId},</if>
+            <if test="argiMachineryName != null">argi_machinery_name = #{argiMachineryName},</if>
+
         </trim>
         where id = #{id}
     </update>

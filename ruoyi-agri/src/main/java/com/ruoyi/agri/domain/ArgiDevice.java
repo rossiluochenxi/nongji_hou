@@ -47,6 +47,20 @@ public class ArgiDevice extends BaseEntity
     @Excel(name = "所属农机")
     private String argiMachineryId;
 
+
+
+    /** 所属农机 */
+    @Excel(name = "所属农机名称")
+    private String argiMachineryName;
+
+    public String getArgiMachineryName() {
+        return argiMachineryName;
+    }
+
+    public void setArgiMachineryName(String argiMachineryName) {
+        this.argiMachineryName = argiMachineryName;
+    }
+
     public void setId(String id) 
     {
         this.id = id;
