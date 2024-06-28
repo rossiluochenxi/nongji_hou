@@ -44,6 +44,7 @@ public class MapFields extends BaseEntity
     @Excel(name = "面积")
     private BigDecimal fieldsArea;
 
+
     /** 地图面积信息 */
     @Excel(name = "地图面积信息")
     private String mapInfo;
@@ -51,6 +52,43 @@ public class MapFields extends BaseEntity
     /** 状态 */
     @Excel(name = "状态")
     private String status;
+
+    public BigDecimal getMapId() {
+        return mapId;
+    }
+
+    public void setMapId(BigDecimal mapId) {
+        this.mapId = mapId;
+    }
+
+    public BigDecimal getNewMapInfo() {
+        return newMapInfo;
+    }
+
+    public void setNewMapInfo(BigDecimal newMapInfo) {
+        this.newMapInfo = newMapInfo;
+    }
+
+    public BigDecimal getMapFieldsNo() {
+        return mapFieldsNo;
+    }
+
+    public void setMapFieldsNo(BigDecimal mapFieldsNo) {
+        this.mapFieldsNo = mapFieldsNo;
+    }
+
+    /** 面积id */
+    @Excel(name = "面积id")
+    private BigDecimal mapId;
+
+    /** 电子围栏(新) */
+    @Excel(name = "电子围栏(新)")
+    private BigDecimal newMapInfo;
+
+    /** 电子围栏编号 */
+    @Excel(name = "电子围栏编号")
+    private BigDecimal mapFieldsNo;
+
 
     public void setId(String id) 
     {
@@ -145,21 +183,20 @@ public class MapFields extends BaseEntity
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("userId", getUserId())
-            .append("deptId", getDeptId())
-            .append("fieldsName", getFieldsName())
-            .append("agriTypeId", getAgriTypeId())
-            .append("agriTypeCategory", getAgriTypeCategory())
-            .append("agriTypeType", getAgriTypeType())
-            .append("fieldsArea", getFieldsArea())
-            .append("mapInfo", getMapInfo())
-            .append("status", getStatus())
-            .toString();
+        return "MapFields{" +
+                "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
+                ", deptId='" + deptId + '\'' +
+                ", fieldsName='" + fieldsName + '\'' +
+                ", agriTypeId='" + agriTypeId + '\'' +
+                ", agriTypeCategory='" + agriTypeCategory + '\'' +
+                ", agriTypeType='" + agriTypeType + '\'' +
+                ", fieldsArea=" + fieldsArea +
+                ", mapInfo='" + mapInfo + '\'' +
+                ", status='" + status + '\'' +
+                ", mapId=" + mapId +
+                ", newMapInfo=" + newMapInfo +
+                ", mapFieldsNo=" + mapFieldsNo +
+                '}';
     }
 }

@@ -19,10 +19,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="fieldsArea"    column="fields_area"    />
         <result property="mapInfo"    column="map_info"    />
         <result property="status"    column="status"    />
+        <result property="mapId"    column="map_id"    />
+        <result property="newMapInfo"    column="new_map_info"    />
+        <result property="mapFieldsNo"    column="map_fields_no"    />
     </resultMap>
 
     <sql id="selectMapFieldsVo">
-        select id, create_by, create_time, update_by, update_time, user_id, dept_id, fields_name, agri_type_id, agri_type_category, agri_type_type, fields_area, map_info, status from map_fields t
+        select id, create_by, create_time, update_by, update_time, user_id, dept_id, fields_name, agri_type_id, agri_type_category, agri_type_type, fields_area, map_info, status,map_id,new_map_info,map_fields_no from map_fields t
     </sql>
 
     <select id="selectMapFieldsList" parameterType="MapFields" resultMap="MapFieldsResult">
@@ -60,6 +63,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="fieldsArea != null">fields_area,</if>
             <if test="mapInfo != null and mapInfo != ''">map_info,</if>
             <if test="status != null">status,</if>
+            <if test="mapId != null and mapId != ''">map_id,</if>
+            <if test="newMapInfo != null and newMapInfo != ''">new_map_info,</if>
+            <if test="mapFieldsNo != null and mapFieldsNo != ''">map_fields_no,</if>
+
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -76,6 +83,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="fieldsArea != null">#{fieldsArea},</if>
             <if test="mapInfo != null and mapInfo != ''">#{mapInfo},</if>
             <if test="status != null">#{status},</if>
+            <if test="mapId != null and mapId != ''">#{mapId},</if>
+            <if test="newMapInfo != null and newMapInfo != ''">#{newMapInfo},</if>
+            <if test="mapFieldsNo != null and mapFieldsNo != ''">#{mapFieldsNo},</if>
          </trim>
     </insert>
 
@@ -95,6 +105,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="fieldsArea != null">fields_area = #{fieldsArea},</if>
             <if test="mapInfo != null and mapInfo != ''">map_info = #{mapInfo},</if>
             <if test="status != null">status = #{status},</if>
+            <if test="mapId != null and mapId != ''">map_id = #{mapId},</if>
+            <if test="newMapInfo != null and newMapInfo != ''">new_map_info = #{newMapInfo},</if>
+            <if test="mapFieldsNo != null and mapFieldsNo != ''">map_fields_no = #{mapFieldsNo},</if>
         </trim>
         where id = #{id}
     </update>
