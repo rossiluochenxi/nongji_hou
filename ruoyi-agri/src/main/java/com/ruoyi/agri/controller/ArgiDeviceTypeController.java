@@ -47,6 +47,17 @@ public class ArgiDeviceTypeController extends BaseController
     }
 
     /**
+     * 查询设备类型列表
+     */
+    @PreAuthorize("@ss.hasPermi('agri:deviceType:list')")
+    @GetMapping("/listQuery")
+    public TableDataInfo listQuery(ArgiDeviceType argiDeviceType)
+    {
+        List<ArgiDeviceType> list = argiDeviceTypeService.selectArgiDeviceTypeList(argiDeviceType);
+        return getDataTable(list);
+    }
+
+    /**
      * 导出设备类型列表
      */
     @PreAuthorize("@ss.hasPermi('agri:deviceType:export')")
