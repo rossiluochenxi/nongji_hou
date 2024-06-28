@@ -47,6 +47,16 @@ public class ArgiMachineryTypeController extends BaseController
     }
 
     /**
+     * 查询农机类型列表
+     */
+    @PreAuthorize("@ss.hasPermi('agri:machineryType:list')")
+    @GetMapping("/listQuery")
+    public TableDataInfo listQuery(ArgiMachineryType argiMachineryType)
+    {
+        List<ArgiMachineryType> list = argiMachineryTypeService.selectArgiMachineryTypeList(argiMachineryType);
+        return getDataTable(list);
+    }
+    /**
      * 导出农机类型列表
      */
     @PreAuthorize("@ss.hasPermi('agri:machineryType:export')")
