@@ -96,7 +96,6 @@ public class AgriTypeController extends BaseController {
     @Log(title = "面积类型管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody AgriType agriType) {
-        String a='';
         agriType.setCreateBy(getUsername());
         agriType.setUserId(getUserId().toString());
         agriType.setDeptId(getDeptId().toString());
