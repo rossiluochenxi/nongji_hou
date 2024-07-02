@@ -1,6 +1,8 @@
 package com.ruoyi.map.service;
 
 import java.util.List;
+
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.map.domain.MapFields;
 
 /**
@@ -58,4 +60,24 @@ public interface IMapFieldsService
      * @return 结果
      */
     public int deleteMapFieldsById(String id);
+
+//    /**
+//     * 新增电子围栏信息
+//     *
+//     * @param mapFields 电子围栏信息
+//     * @return 结果
+//     */
+//    public int insertFence(MapFields mapFields);
+
+
+    /**
+     * 新增电子围栏信息
+     *
+     * @param mapFields 电子围栏信息
+     * @return 操作结果
+     */
+    public int  insertFence(MapFields mapFields);
+
 }
+
+
