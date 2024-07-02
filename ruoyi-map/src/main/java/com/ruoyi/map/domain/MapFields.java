@@ -53,41 +53,44 @@ public class MapFields extends BaseEntity
     @Excel(name = "状态")
     private String status;
 
-    public BigDecimal getMapId() {
+
+    public String getMapId() {
         return mapId;
     }
 
-    public void setMapId(BigDecimal mapId) {
+    public void setMapId(String mapId) {
         this.mapId = mapId;
     }
 
-    public BigDecimal getNewMapInfo() {
-        return newMapInfo;
-    }
-
-    public void setNewMapInfo(BigDecimal newMapInfo) {
-        this.newMapInfo = newMapInfo;
-    }
-
-    public BigDecimal getMapFieldsNo() {
+    public String getMapFieldsNo() {
         return mapFieldsNo;
     }
 
-    public void setMapFieldsNo(BigDecimal mapFieldsNo) {
+    public void setMapFieldsNo(String mapFieldsNo) {
         this.mapFieldsNo = mapFieldsNo;
     }
 
+    public String getNewMapInfo() {
+        return newMapInfo;
+    }
+
+    public void setNewMapInfo(String newMapInfo) {
+        this.newMapInfo = newMapInfo;
+    }
+
+
+
     /** 面积id */
     @Excel(name = "面积id")
-    private BigDecimal mapId;
+    private String mapId;
 
     /** 电子围栏(新) */
     @Excel(name = "电子围栏(新)")
-    private BigDecimal newMapInfo;
+    private String newMapInfo;
 
     /** 电子围栏编号 */
     @Excel(name = "电子围栏编号")
-    private BigDecimal mapFieldsNo;
+    private String mapFieldsNo;
 
 
     public void setId(String id) 

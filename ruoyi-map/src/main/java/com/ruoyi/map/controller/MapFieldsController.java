@@ -117,4 +117,35 @@ public class MapFieldsController extends BaseController
     {
         return toAjax(mapFieldsService.deleteMapFieldsByIds(ids));
     }
+
+
+    /**
+     * 新增电子围栏信息
+     */
+    @PreAuthorize("@ss.hasPermi('map:fields:add')")
+    @Log(title = "电子围栏信息", businessType = BusinessType.INSERT)
+    @PostMapping("/addFence")
+    public AjaxResult addFence(@RequestBody MapFields mapFields) {
+        System.out.println("数据到这里了嘛");
+        System.out.println(mapFields.toString());
+//        mapFields.setCreateBy(getUsername());
+//        mapFields.setUserId(getUserId().toString());
+//        mapFields.setDeptId(getDeptId().toString());
+
+        return toAjax(mapFieldsService.insertFence(mapFields));
+
+    }
+
+
+//    public interface MapFieldsService {
+//
+//        /**
+//         * 新增电子围栏信息
+//         * @param mapFields 电子围栏信息
+//         * @return 操作结果
+//         */
+//        AjaxResult insertMapFields(MapFields mapFields);
+//    }
+
+
 }

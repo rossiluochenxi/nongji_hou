@@ -53,9 +53,18 @@ public interface MapFieldsMapper
 
     /**
      * 批量删除任务耕地信息
-     * 
+     *
      * @param ids 需要删除的数据主键集合
      * @return 结果
      */
     public int deleteMapFieldsByIds(String[] ids);
+
+
+    /**
+     * 新增任务耕地信息
+     *
+     * @param mapFields 任务耕地信息
+     * @return 结果
+     */
+    public int insertFence(MapFields mapFields);
 }
