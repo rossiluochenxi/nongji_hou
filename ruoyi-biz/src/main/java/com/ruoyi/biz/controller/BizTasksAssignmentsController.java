@@ -92,6 +92,22 @@ public class BizTasksAssignmentsController extends BaseController
     }
 
     /**
+     * 修改状态联动任务管理
+     * @param bizTasksAssignments
+     * @return
+     */
+    @PreAuthorize("@ss.hasPermi('biz:tasksAssignments:edit')")
+    @Log(title = "我的任务", businessType = BusinessType.UPDATE)
+    @PutMapping("/updateTasksData")
+    public AjaxResult updateTasksData(@RequestBody BizTasksAssignments bizTasksAssignments)
+    {
+        return toAjax(bizTasksAssignmentsService.UpdateTasksDataService(bizTasksAssignments));
+    }
+
+
+
+
+    /**
      * 删除我的任务
      */
     @PreAuthorize("@ss.hasPermi('biz:tasksAssignments:remove')")
