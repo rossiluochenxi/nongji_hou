@@ -2,6 +2,7 @@ package com.ruoyi.biz.service.impl;
 
 import java.util.List;
 
+import com.ruoyi.biz.domain.BizTasks;
 import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
@@ -23,7 +24,8 @@ public class BizTasksAssignmentsServiceImpl implements IBizTasksAssignmentsServi
     @Autowired
     private BizTasksAssignmentsMapper bizTasksAssignmentsMapper;
 
-
+    @Autowired
+    private BizTasksServiceImpl bizTasksServiceImpl;
     /**
      * 查询我的任务
      * 
@@ -75,6 +77,19 @@ public class BizTasksAssignmentsServiceImpl implements IBizTasksAssignmentsServi
         bizTasksAssignments.setUpdateTime(DateUtils.getNowDate());
         return bizTasksAssignmentsMapper.updateBizTasksAssignments(bizTasksAssignments);
     }
+
+    @Override
+    public int UpdateTasksDataService(BizTasksAssignments bizTasksAssignments) {
+
+        BizTasks bizTasks = new BizTasks();
+        bizTasks.setId( bizTasksAssignments.getBizTasksId());
+        bizTasks.setStatus( bizTasksAssignments.getTasksStatus());
+
+        bizTasksServiceImpl.updateBizTasks(bizTasks);
+        bizTasksAssignments.setUpdateTime(DateUtils.getNowDate());
+        return bizTasksAssignmentsMapper.updateBizTasksAssignments(bizTasksAssignments);
+    }
+
 
     /**
      * 批量删除我的任务
