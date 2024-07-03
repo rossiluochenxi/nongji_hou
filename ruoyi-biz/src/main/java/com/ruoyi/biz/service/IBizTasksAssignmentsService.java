@@ -42,6 +42,7 @@ public interface IBizTasksAssignmentsService
      * @return 结果
      */
     public int updateBizTasksAssignments(BizTasksAssignments bizTasksAssignments);
+    public int UpdateTasksDataService(BizTasksAssignments bizTasksAssignments);
 
     /**
      * 批量删除我的任务
