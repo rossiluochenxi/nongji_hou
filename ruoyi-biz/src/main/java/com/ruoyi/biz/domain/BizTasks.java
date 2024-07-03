@@ -61,6 +61,20 @@ public class BizTasks extends BaseEntity
     @Excel(name = "任务名称")
     private String bizName;
 
+    public String getTaskCreate() {
+        return taskCreate;
+    }
+
+    public void setTaskCreate(String taskCreate) {
+        this.taskCreate = taskCreate;
+    }
+
+    /** 任务创建者 */
+    @Excel(name = "任务创建者")
+    private String taskCreate;
+
+
+
     public String getAgriTypeId() {
         return agriTypeId;
     }

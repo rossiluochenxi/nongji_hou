@@ -77,7 +77,7 @@ public class BizTasksController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody BizTasks bizTasks)
     {
-
+        bizTasks.setTaskCreate(getNickName());
         bizTasks.setCreateBy(getUsername());
 //        bizTasks.setUserId(getUserId().toString());
 //        bizTasks.setDeptId(getDeptId().toString());

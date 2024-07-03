@@ -199,4 +199,11 @@ public class BaseController
     {
         return getLoginUser().getUsername();
     }
+    /**
+     * 获取登录用户名
+     */
+    public String getNickName()
+    {
+        return getLoginUser().getUser().getNickName();
+    }
 }
