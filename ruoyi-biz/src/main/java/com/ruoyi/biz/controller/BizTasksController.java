@@ -113,9 +113,8 @@ public class BizTasksController extends BaseController
     @PreAuthorize("@ss.hasPermi('biz:tasks:remove')")
     @Log(title = "业务任务", businessType = BusinessType.DELETE)
     @DeleteMapping("/withdraw/{ids}")
-     public AjaxResult withdraw(@PathVariable String[] ids)
+     public AjaxResult withdraw(@PathVariable String ids)
     {
-
         return toAjax(bizTasksService.withdrawBizTasksByIds(ids));
     }
 

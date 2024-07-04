@@ -56,7 +56,7 @@ public interface IBizTasksService
      * @param ids 需要撤回的业务任务主键集合
      * @return 结果
      */
-    public int withdrawBizTasksByIds(String[] ids);
+    public int withdrawBizTasksByIds(String ids);
 
 
     /**
