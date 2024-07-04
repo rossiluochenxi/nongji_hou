@@ -148,7 +148,10 @@ public class BaseController
     {
         return rows > 0 ? AjaxResult.success() : AjaxResult.error();
     }
-
+    protected AjaxResult toAjaxWithdraw(int rows)
+    {
+        return rows > 0 ? AjaxResult.success() : AjaxResult.toAjaxWithdrawError();
+    }
     /**
      * 响应返回结果
      * 

@@ -135,6 +135,10 @@ public class AjaxResult extends HashMap<String, Object>
         return AjaxResult.error("操作失败");
     }
 
+    public static AjaxResult toAjaxWithdrawError()
+    {
+        return AjaxResult.error("农机主对任务已确认或已工作中或已完成无法执行撤回操作");
+    }
     /**
      * 返回错误消息
      * 

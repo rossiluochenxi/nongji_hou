@@ -18,6 +18,7 @@ public interface IBizTasksAssignmentsService
      * @return 我的任务
      */
     public BizTasksAssignments selectBizTasksAssignmentsById(String id);
+    public BizTasksAssignments selectBizTasksAssignmentsBybizTasksId(String id);
 
     /**
      * 查询我的任务列表
