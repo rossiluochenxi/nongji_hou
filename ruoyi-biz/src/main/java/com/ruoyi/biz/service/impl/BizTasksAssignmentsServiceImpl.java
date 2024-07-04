@@ -118,7 +118,7 @@ public class BizTasksAssignmentsServiceImpl implements IBizTasksAssignmentsServi
 
 
     /**
-     * 任务管理id查询
+     * 通过任务id删除我的任务
      *
      * @param id 我的任务主键
      * @return 我的任务

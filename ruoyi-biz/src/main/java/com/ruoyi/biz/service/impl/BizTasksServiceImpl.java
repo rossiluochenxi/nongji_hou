@@ -115,9 +115,9 @@ public class BizTasksServiceImpl implements IBizTasksService
      * @return 结果
      */
     @Override
-    public int withdrawBizTasksByIds(String[] ids) {
+    public int withdrawBizTasksByIds(String ids) {
 
-      return  bizTasksAssignmentsServiceImpl.deleteBizTasksAssignmentsTasksQueryById(String.valueOf(ids));
+      return  bizTasksAssignmentsServiceImpl.deleteBizTasksAssignmentsTasksQueryById(ids);
 
 
     }
