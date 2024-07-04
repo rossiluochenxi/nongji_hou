@@ -115,7 +115,7 @@ public class BizTasksController extends BaseController
     @DeleteMapping("/withdraw/{ids}")
      public AjaxResult withdraw(@PathVariable String ids)
     {
-        return toAjax(bizTasksService.withdrawBizTasksByIds(ids));
-    }
 
+        return toAjaxWithdraw(bizTasksService.withdrawBizTasksByIds(ids));
+    }
 }

@@ -116,10 +116,17 @@ public class BizTasksServiceImpl implements IBizTasksService
      */
     @Override
     public int withdrawBizTasksByIds(String ids) {
-
-      return  bizTasksAssignmentsServiceImpl.deleteBizTasksAssignmentsTasksQueryById(ids);
-
+        BizTasksAssignments  bizTasksAssignments= bizTasksAssignmentsServiceImpl.selectBizTasksAssignmentsBybizTasksId(ids);
+        if (bizTasksAssignments !=null) {
+            if ("1".equals(bizTasksAssignments.getTasksStatus()) || "2".equals(bizTasksAssignments.getTasksStatus()) || "3".equals(bizTasksAssignments.getTasksStatus())) {
+                System.out.println("状态为 不可以撤回");
+                return 0;
+            }else{
+                return  bizTasksAssignmentsServiceImpl.deleteBizTasksAssignmentsTasksQueryById(ids);
+            }
+        }else{
+            return  bizTasksAssignmentsServiceImpl.deleteBizTasksAssignmentsTasksQueryById(ids);
+             }
 
     }
-
 }

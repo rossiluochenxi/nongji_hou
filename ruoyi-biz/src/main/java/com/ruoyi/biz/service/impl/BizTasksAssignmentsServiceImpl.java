@@ -37,6 +37,16 @@ public class BizTasksAssignmentsServiceImpl implements IBizTasksAssignmentsServi
     {
         return bizTasksAssignmentsMapper.selectBizTasksAssignmentsById(id);
     }
+    /**
+     * 用任务管理id查询我的任务数据
+     *
+     * @param id 任务管理id
+     * @return 我的任务
+     */
+    public BizTasksAssignments selectBizTasksAssignmentsBybizTasksId(String id)
+    {
+        return bizTasksAssignmentsMapper.selectBizTasksAssignmentsByIdbizTasksId(id);
+    }
 
 
     /**

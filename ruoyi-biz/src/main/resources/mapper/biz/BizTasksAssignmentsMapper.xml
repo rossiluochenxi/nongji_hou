@@ -60,6 +60,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectBizTasksAssignmentsVo"/>
         where id = #{id}
     </select>
+
+    <select id="selectBizTasksAssignmentsByIdbizTasksId" parameterType="String" resultMap="BizTasksAssignmentsResult">
+        <include refid="selectBizTasksAssignmentsVo"/>
+        where biz_tasks_id = #{id}
+    </select>
         
     <insert id="insertBizTasksAssignments" parameterType="BizTasksAssignments">
         insert into biz_tasks_assignments

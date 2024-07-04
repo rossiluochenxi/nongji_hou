@@ -19,6 +19,9 @@ public interface BizTasksAssignmentsMapper
      */
     public BizTasksAssignments selectBizTasksAssignmentsById(String id);
 
+
+    public BizTasksAssignments selectBizTasksAssignmentsByIdbizTasksId(String id);
+
     /**
      * 查询我的任务列表
      * 
