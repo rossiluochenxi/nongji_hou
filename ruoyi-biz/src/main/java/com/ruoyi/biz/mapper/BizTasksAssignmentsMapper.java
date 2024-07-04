@@ -52,6 +52,16 @@ public interface BizTasksAssignmentsMapper
      */
     public int deleteBizTasksAssignmentsById(String id);
 
+
+
+    /**
+     * 删除我的任务
+     *
+     * @param id 我的任务主键
+     * @return 结果
+     */
+    public int deleteBizTasksAssignmentsBytasksId(String id);
+
     /**
      * 批量删除我的任务
      * 

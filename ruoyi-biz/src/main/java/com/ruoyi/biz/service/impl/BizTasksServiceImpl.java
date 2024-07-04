@@ -108,4 +108,18 @@ public class BizTasksServiceImpl implements IBizTasksService
     {
         return bizTasksMapper.deleteBizTasksById(id);
     }
+    /**
+     * 批量撤回业务任务
+     *
+     * @param ids 需要撤回的业务任务主键
+     * @return 结果
+     */
+    @Override
+    public int withdrawBizTasksByIds(String[] ids) {
+
+      return  bizTasksAssignmentsServiceImpl.deleteBizTasksAssignmentsTasksQueryById(String.valueOf(ids));
+
+
+    }
+
 }

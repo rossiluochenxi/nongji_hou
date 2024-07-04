@@ -59,4 +59,5 @@ public interface BizTasksMapper
      * @return 结果
      */
     public int deleteBizTasksByIds(String[] ids);
+
 }

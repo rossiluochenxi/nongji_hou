@@ -50,6 +50,14 @@ public interface IBizTasksService
      * @return 结果
      */
     public int deleteBizTasksByIds(String[] ids);
+    /**
+     * 撤回业务任务
+     *
+     * @param ids 需要撤回的业务任务主键集合
+     * @return 结果
+     */
+    public int withdrawBizTasksByIds(String[] ids);
+
 
     /**
      * 删除业务任务信息
@@ -58,4 +66,5 @@ public interface IBizTasksService
      * @return 结果
      */
     public int deleteBizTasksById(String id);
+
 }

@@ -103,6 +103,20 @@ public class BizTasksController extends BaseController
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable String[] ids)
     {
+
         return toAjax(bizTasksService.deleteBizTasksByIds(ids));
     }
+
+    /**
+     * 撤回业务任务
+     */
+    @PreAuthorize("@ss.hasPermi('biz:tasks:remove')")
+    @Log(title = "业务任务", businessType = BusinessType.DELETE)
+    @DeleteMapping("/withdraw/{ids}")
+     public AjaxResult withdraw(@PathVariable String[] ids)
+    {
+
+        return toAjax(bizTasksService.withdrawBizTasksByIds(ids));
+    }
+
 }

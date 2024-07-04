@@ -59,4 +59,7 @@ public interface IBizTasksAssignmentsService
      * @return 结果
      */
     public int deleteBizTasksAssignmentsById(String id);
+
+    public int deleteBizTasksAssignmentsTasksQueryById(String id);
+
 }

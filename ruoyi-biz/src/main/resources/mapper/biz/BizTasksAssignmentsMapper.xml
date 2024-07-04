@@ -143,6 +143,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         delete from biz_tasks_assignments where id = #{id}
     </delete>
 
+    <delete id="deleteBizTasksAssignmentsBytasksId" parameterType="String">
+        delete from biz_tasks_assignments where biz_tasks_id = #{id}
+    </delete>
+
+
     <delete id="deleteBizTasksAssignmentsByIds" parameterType="String">
         delete from biz_tasks_assignments where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
