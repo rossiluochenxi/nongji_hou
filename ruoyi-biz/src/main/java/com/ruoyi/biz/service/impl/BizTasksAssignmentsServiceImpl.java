@@ -38,6 +38,7 @@ public class BizTasksAssignmentsServiceImpl implements IBizTasksAssignmentsServi
         return bizTasksAssignmentsMapper.selectBizTasksAssignmentsById(id);
     }
 
+
     /**
      * 查询我的任务列表
      * 
@@ -114,4 +115,18 @@ public class BizTasksAssignmentsServiceImpl implements IBizTasksAssignmentsServi
     {
         return bizTasksAssignmentsMapper.deleteBizTasksAssignmentsById(id);
     }
+
+
+    /**
+     * 任务管理id查询
+     *
+     * @param id 我的任务主键
+     * @return 我的任务
+     */
+    @Override
+    public int deleteBizTasksAssignmentsTasksQueryById(String id)
+    {
+        return bizTasksAssignmentsMapper.deleteBizTasksAssignmentsBytasksId(id);
+    }
+
 }
