@@ -25,10 +25,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="agriTypeCategory"    column="agri_type_category"    />
         <result property="agriTypeType"    column="agri_type_type"    />
         <result property="taskCreate"    column="task_create"    />
+        <result property="withdrawLive"    column="withdraw_live"    />
     </resultMap>
 
     <sql id="selectBizTasksVo">
-        select id, create_by, create_time, update_by, update_time, user_id, dept_id, agri_farmer_id, agri_farmer_name, agri_fields_id, agri_fields_name, start_time, end_time, status, serial_num, biz_name ,agri_type_id, agri_type_category, agri_type_type,task_create from biz_tasks t
+        select id, create_by, create_time, update_by, update_time, user_id, dept_id, agri_farmer_id, agri_farmer_name, agri_fields_id, agri_fields_name, start_time, end_time, status, serial_num, biz_name ,agri_type_id, agri_type_category, agri_type_type,task_create,withdraw_live from biz_tasks t
     </sql>
 
     <select id="selectBizTasksList" parameterType="BizTasks" resultMap="BizTasksResult">
@@ -74,6 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="agriTypeCategory != null and agriTypeCategory != ''">agri_type_category,</if>
             <if test="agriTypeType != null and agriTypeType != ''">agri_type_type,</if>
             <if test="taskCreate != null and taskCreate != ''">task_create,</if>
+            <if test="withdrawlive != null and taskCreate != ''">withdraw_live,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -96,6 +98,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="agriTypeCategory != null and agriTypeCategory != ''">#{agriTypeCategory},</if>
             <if test="agriTypeType != null and agriTypeType != ''">#{agriTypeType},</if>
             <if test="taskCreate != null and taskCreate != ''">#{taskCreate},</if>
+            <if test="withdrawlive != null and taskCreate != ''">#{withdraw_live},</if>
          </trim>
     </insert>
 
@@ -121,6 +124,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="agriTypeCategory != null and agriTypeCategory != ''">agri_type_category = #{agriTypeCategory},</if>
             <if test="agriTypeType != null and agriTypeType != ''">agri_type_type = #{agriTypeType},</if>
             <if test="taskCreate != null and taskCreate != ''">task_create = #{taskCreate},</if>
+            <if test="withdrawlive != null and taskCreate != ''">task_create = #{withdraw_live},</if>
         </trim>
         where id = #{id}
     </update>

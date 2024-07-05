@@ -61,6 +61,8 @@ public class BizTasks extends BaseEntity
     @Excel(name = "任务名称")
     private String bizName;
 
+
+
     public String getTaskCreate() {
         return taskCreate;
     }
@@ -73,7 +75,17 @@ public class BizTasks extends BaseEntity
     @Excel(name = "任务创建者")
     private String taskCreate;
 
+    public String getWithdrawLive() {
+        return withdrawLive;
+    }
 
+    public void setWithdrawLive(String withdrawLive) {
+        this.withdrawLive = withdrawLive;
+    }
+
+    /** 撤回状态 */
+    @Excel(name = "撤回状态")
+    private String withdrawLive;
 
     public String getAgriTypeId() {
         return agriTypeId;
