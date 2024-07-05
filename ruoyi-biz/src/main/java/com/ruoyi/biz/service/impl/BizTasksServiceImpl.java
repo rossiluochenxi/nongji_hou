@@ -3,6 +3,7 @@ package com.ruoyi.biz.service.impl;
 import java.util.List;
 
 import com.ruoyi.biz.domain.BizTasksAssignments;
+import com.ruoyi.biz.mapper.BizTasksAssignmentsMapper;
 import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.bean.BeanUtils;
@@ -62,6 +63,7 @@ public class BizTasksServiceImpl implements IBizTasksService
     public int insertBizTasks(BizTasks bizTasks)
     {
         bizTasks.setId(IdUtils.randomUUID());
+        bizTasks.setWithdrawLive("1");
         BizTasksAssignments bizTasksAssignments = new BizTasksAssignments();
         BeanUtils.copyProperties(bizTasks,bizTasksAssignments);
         bizTasksAssignments.setBizTasksId(bizTasks.getId());
@@ -84,6 +86,24 @@ public class BizTasksServiceImpl implements IBizTasksService
         bizTasks.setUpdateTime(DateUtils.getNowDate());
         return bizTasksMapper.updateBizTasks(bizTasks);
     }
+    /**
+     * 重新下发业务任务
+     *
+     * @param bizTasks 业务任务
+     * @return 结果
+     */
+    @Override
+    public int reissueBizTasks(BizTasks bizTasks) {
+        BizTasksAssignments bizTasksAssignments = new BizTasksAssignments();
+        BeanUtils.copyProperties(bizTasks,bizTasksAssignments);
+        bizTasksAssignments.setBizTasksId(bizTasks.getId());
+        bizTasksAssignments.setBizTasksName(bizTasks.getBizName());
+        bizTasks.setUpdateTime(DateUtils.getNowDate());
+        bizTasksMapper.updateBizTasks(bizTasks);
+        int result=bizTasksAssignmentsServiceImpl.insertBizTasksAssignments(bizTasksAssignments);
+       return  result;
+    }
+
 
     /**
      * 批量删除业务任务
@@ -119,12 +139,12 @@ public class BizTasksServiceImpl implements IBizTasksService
         BizTasksAssignments  bizTasksAssignments= bizTasksAssignmentsServiceImpl.selectBizTasksAssignmentsBybizTasksId(ids);
         if (bizTasksAssignments !=null) {
             if ("1".equals(bizTasksAssignments.getTasksStatus()) || "2".equals(bizTasksAssignments.getTasksStatus()) || "3".equals(bizTasksAssignments.getTasksStatus())) {
-                System.out.println("状态为 不可以撤回");
                 return 0;
             }else{
                 return  bizTasksAssignmentsServiceImpl.deleteBizTasksAssignmentsTasksQueryById(ids);
             }
         }else{
+
             return  bizTasksAssignmentsServiceImpl.deleteBizTasksAssignmentsTasksQueryById(ids);
              }
 

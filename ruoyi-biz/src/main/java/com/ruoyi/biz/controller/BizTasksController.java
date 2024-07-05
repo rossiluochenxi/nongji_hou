@@ -84,6 +84,8 @@ public class BizTasksController extends BaseController
         return toAjax(bizTasksService.insertBizTasks(bizTasks));
     }
 
+
+
     /**
      * 修改业务任务
      */
@@ -92,8 +94,10 @@ public class BizTasksController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody BizTasks bizTasks)
     {
+
         return toAjax(bizTasksService.updateBizTasks(bizTasks));
     }
+
 
     /**
      * 删除业务任务
@@ -118,4 +122,18 @@ public class BizTasksController extends BaseController
 
         return toAjaxWithdraw(bizTasksService.withdrawBizTasksByIds(ids));
     }
+
+
+    /**
+     * 重新下发业务任务
+     */
+    @PreAuthorize("@ss.hasPermi('biz:tasks:edit')")
+    @Log(title = "业务任务", businessType = BusinessType.UPDATE)
+    @PutMapping("/reissue")
+    public AjaxResult reissue(@RequestBody BizTasks bizTasks)
+    {
+
+        return toAjax(bizTasksService.reissueBizTasks(bizTasks));
+    }
+
 }

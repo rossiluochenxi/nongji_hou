@@ -75,7 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="agriTypeCategory != null and agriTypeCategory != ''">agri_type_category,</if>
             <if test="agriTypeType != null and agriTypeType != ''">agri_type_type,</if>
             <if test="taskCreate != null and taskCreate != ''">task_create,</if>
-            <if test="withdrawlive != null and taskCreate != ''">withdraw_live,</if>
+            <if test="withdrawLive != null and withdrawLive != ''">withdraw_live,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -98,9 +98,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="agriTypeCategory != null and agriTypeCategory != ''">#{agriTypeCategory},</if>
             <if test="agriTypeType != null and agriTypeType != ''">#{agriTypeType},</if>
             <if test="taskCreate != null and taskCreate != ''">#{taskCreate},</if>
-            <if test="withdrawlive != null and taskCreate != ''">#{withdraw_live},</if>
+            <if test="withdrawLive != null and withdrawLive != ''">#{withdrawLive},</if>
          </trim>
     </insert>
+
+
 
     <update id="updateBizTasks" parameterType="BizTasks">
         update biz_tasks
@@ -124,7 +126,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="agriTypeCategory != null and agriTypeCategory != ''">agri_type_category = #{agriTypeCategory},</if>
             <if test="agriTypeType != null and agriTypeType != ''">agri_type_type = #{agriTypeType},</if>
             <if test="taskCreate != null and taskCreate != ''">task_create = #{taskCreate},</if>
-            <if test="withdrawlive != null and taskCreate != ''">task_create = #{withdraw_live},</if>
+            <if test="withdrawLive != null and withdrawLive != ''">withdraw_live = #{withdrawLive},</if>
         </trim>
         where id = #{id}
     </update>

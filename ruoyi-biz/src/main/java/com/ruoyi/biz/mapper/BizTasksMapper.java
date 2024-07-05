@@ -35,6 +35,11 @@ public interface BizTasksMapper
      */
     public int insertBizTasks(BizTasks bizTasks);
 
+
+
+
+
+
     /**
      * 修改业务任务
      * 

@@ -42,6 +42,13 @@ public interface IBizTasksService
      * @return 结果
      */
     public int updateBizTasks(BizTasks bizTasks);
+    /**
+     * 重新下发业务任务
+     *
+     * @param bizTasks 业务任务
+     * @return 结果
+     */
+    public int reissueBizTasks(BizTasks bizTasks);
 
     /**
      * 批量删除业务任务
