@@ -64,6 +64,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectBizTasksAssignmentsByIdbizTasksId" parameterType="String" resultMap="BizTasksAssignmentsResult">
         <include refid="selectBizTasksAssignmentsVo"/>
         where biz_tasks_id = #{id}
+        ORDER BY create_time DESC
+        LIMIT 1
     </select>
         
     <insert id="insertBizTasksAssignments" parameterType="BizTasksAssignments">

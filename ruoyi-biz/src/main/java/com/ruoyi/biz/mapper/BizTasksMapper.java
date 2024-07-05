@@ -65,4 +65,12 @@ public interface BizTasksMapper
      */
     public int deleteBizTasksByIds(String[] ids);
 
+    /**
+     * 修改业务任务
+     *
+     * @param bizTasks 业务任务
+     * @return 结果
+     */
+    public int updateWithdrawLiveById(BizTasks bizTasks);
+
 }

@@ -16,13 +16,12 @@ import com.ruoyi.biz.service.IBizTasksService;
 
 /**
  * 业务任务Service业务层处理
- * 
+ *
  * @author 罗晨熙
  * @date 2024-05-24
  */
 @Service
-public class BizTasksServiceImpl implements IBizTasksService 
-{
+public class BizTasksServiceImpl implements IBizTasksService {
     @Autowired
     private BizTasksMapper bizTasksMapper;
     @Autowired
@@ -30,62 +29,59 @@ public class BizTasksServiceImpl implements IBizTasksService
 
     /**
      * 查询业务任务
-     * 
+     *
      * @param id 业务任务主键
      * @return 业务任务
      */
     @Override
-    public BizTasks selectBizTasksById(String id)
-    {
+    public BizTasks selectBizTasksById(String id) {
         return bizTasksMapper.selectBizTasksById(id);
     }
 
     /**
      * 查询业务任务列表
-     * 
+     *
      * @param bizTasks 业务任务
      * @return 业务任务
      */
     @Override
-    @DataScope(deptAlias = "t" ,userAlias = "t")
-    public List<BizTasks> selectBizTasksList(BizTasks bizTasks)
-    {
+    @DataScope(deptAlias = "t", userAlias = "t")
+    public List<BizTasks> selectBizTasksList(BizTasks bizTasks) {
         return bizTasksMapper.selectBizTasksList(bizTasks);
     }
 
     /**
      * 新增业务任务
-     * 
+     *
      * @param bizTasks 业务任务
      * @return 结果
      */
     @Override
-    public int insertBizTasks(BizTasks bizTasks)
-    {
+    public int insertBizTasks(BizTasks bizTasks) {
         bizTasks.setId(IdUtils.randomUUID());
         bizTasks.setWithdrawLive("1");
         BizTasksAssignments bizTasksAssignments = new BizTasksAssignments();
-        BeanUtils.copyProperties(bizTasks,bizTasksAssignments);
+        BeanUtils.copyProperties(bizTasks, bizTasksAssignments);
         bizTasksAssignments.setBizTasksId(bizTasks.getId());
         bizTasksAssignments.setBizTasksName(bizTasks.getBizName());
         bizTasksAssignmentsServiceImpl.insertBizTasksAssignments(bizTasksAssignments);
         bizTasks.setCreateTime(DateUtils.getNowDate());
-         return bizTasksMapper.insertBizTasks(bizTasks);
+        return bizTasksMapper.insertBizTasks(bizTasks);
     }
 
 
     /**
      * 修改业务任务
-     * 
+     *
      * @param bizTasks 业务任务
      * @return 结果
      */
     @Override
-    public int updateBizTasks(BizTasks bizTasks)
-    {
+    public int updateBizTasks(BizTasks bizTasks) {
         bizTasks.setUpdateTime(DateUtils.getNowDate());
         return bizTasksMapper.updateBizTasks(bizTasks);
     }
+
     /**
      * 重新下发业务任务
      *
@@ -95,39 +91,39 @@ public class BizTasksServiceImpl implements IBizTasksService
     @Override
     public int reissueBizTasks(BizTasks bizTasks) {
         BizTasksAssignments bizTasksAssignments = new BizTasksAssignments();
-        BeanUtils.copyProperties(bizTasks,bizTasksAssignments);
+        bizTasks.setWithdrawLive("1");
+        BeanUtils.copyProperties(bizTasks, bizTasksAssignments);
         bizTasksAssignments.setBizTasksId(bizTasks.getId());
         bizTasksAssignments.setBizTasksName(bizTasks.getBizName());
         bizTasks.setUpdateTime(DateUtils.getNowDate());
         bizTasksMapper.updateBizTasks(bizTasks);
-        int result=bizTasksAssignmentsServiceImpl.insertBizTasksAssignments(bizTasksAssignments);
-       return  result;
+        int result = bizTasksAssignmentsServiceImpl.insertBizTasksAssignments(bizTasksAssignments);
+        return result;
     }
 
 
     /**
      * 批量删除业务任务
-     * 
+     *
      * @param ids 需要删除的业务任务主键
      * @return 结果
      */
     @Override
-    public int deleteBizTasksByIds(String[] ids)
-    {
+    public int deleteBizTasksByIds(String[] ids) {
         return bizTasksMapper.deleteBizTasksByIds(ids);
     }
 
     /**
      * 删除业务任务信息
-     * 
+     *
      * @param id 业务任务主键
      * @return 结果
      */
     @Override
-    public int deleteBizTasksById(String id)
-    {
+    public int deleteBizTasksById(String id) {
         return bizTasksMapper.deleteBizTasksById(id);
     }
+
     /**
      * 批量撤回业务任务
      *
@@ -136,17 +132,27 @@ public class BizTasksServiceImpl implements IBizTasksService
      */
     @Override
     public int withdrawBizTasksByIds(String ids) {
-        BizTasksAssignments  bizTasksAssignments= bizTasksAssignmentsServiceImpl.selectBizTasksAssignmentsBybizTasksId(ids);
-        if (bizTasksAssignments !=null) {
-            if ("1".equals(bizTasksAssignments.getTasksStatus()) || "2".equals(bizTasksAssignments.getTasksStatus()) || "3".equals(bizTasksAssignments.getTasksStatus())) {
+        BizTasks bizTasks = new BizTasks();
+        BizTasksAssignments bizTasksAssignments = bizTasksAssignmentsServiceImpl.selectBizTasksAssignmentsBybizTasksId(ids);
+        if (bizTasksAssignments != null) {
+            if ("1".equals(bizTasksAssignments.getTasksStatus()) ||
+                    "2".equals(bizTasksAssignments.getTasksStatus())
+                    || "3".equals(bizTasksAssignments.getTasksStatus())) {
                 return 0;
-            }else{
-                return  bizTasksAssignmentsServiceImpl.deleteBizTasksAssignmentsTasksQueryById(ids);
+            } else {
+                bizTasks.setId(ids);
+                bizTasks.setWithdrawLive("0");
+//                this.updateBizTasks(sc);
+                bizTasksMapper.updateWithdrawLiveById(bizTasks);
+                return bizTasksAssignmentsServiceImpl.deleteBizTasksAssignmentsTasksQueryById(ids);
             }
-        }else{
-
-            return  bizTasksAssignmentsServiceImpl.deleteBizTasksAssignmentsTasksQueryById(ids);
-             }
+        } else {
+            bizTasks.setId(ids);
+            bizTasks.setWithdrawLive("0");
+//            this.updateBizTasks(sc);
+            bizTasksMapper.updateWithdrawLiveById(bizTasks);
+            return bizTasksAssignmentsServiceImpl.deleteBizTasksAssignmentsTasksQueryById(ids);
+        }
 
     }
 }

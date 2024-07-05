@@ -141,4 +141,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
+
+
+<!--    &lt;!&ndash; 更新 withdraw_live 字段为 0 的 SQL 语句 &ndash;&gt;-->
+<!--    <update id="updateWithdrawLiveById" parameterType="BizTasks">-->
+<!--        update biz_tasks-->
+<!--        SET withdraw_live = {withdrawLive}-->
+<!--        WHERE id = #{id}-->
+<!--    </update>-->
+
+    <update id="updateWithdrawLiveById" parameterType="BizTasks">
+        update biz_tasks
+        <trim prefix="SET" suffixOverrides=",">
+           <if test="withdrawLive != null and withdrawLive != ''">withdraw_live = #{withdrawLive},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
 </mapper>
