@@ -126,11 +126,13 @@ public class MapFieldsController extends BaseController
     @Log(title = "电子围栏信息", businessType = BusinessType.INSERT)
     @PostMapping("/addFence")
     public AjaxResult addFence(@RequestBody MapFields mapFields) {
-        System.out.println("数据到这里了嘛");
-        System.out.println(mapFields.toString());
-//        mapFields.setCreateBy(getUsername());
-//        mapFields.setUserId(getUserId().toString());
-//        mapFields.setDeptId(getDeptId().toString());
+//        System.out.println("数据到这里了嘛");
+//        System.out.println(mapFields.toString());
+        mapFields.setCreateBy(getUsername());
+        mapFields.setUserId(getUserId().toString());
+        mapFields.setDeptId(getDeptId().toString());
+//        System.out.println("数据到这里了嘛      ：" +getUserId().toString());
+//        System.out.println("数据到这里了嘛      ：" +getDeptId().toString());
 
         return toAjax(mapFieldsService.insertFence(mapFields));
 
