@@ -42,7 +42,7 @@ public class AgriTypeServiceImpl implements IAgriTypeService
      * @return 面积类型管理
      */
     @Override
-    @DataScope(deptAlias = "t" ,userAlias = "t")
+//    @DataScope(deptAlias = "t" ,userAlias = "t")
      public List<AgriType> selectAgriTypeList(AgriType agriType)
     {
         return agriTypeMapper.selectAgriTypeList(agriType);
