@@ -91,7 +91,7 @@ public class SysUserServiceImpl implements ISysUserService
         List<SysUser> guoLv = userMapper.selectUserList(user);
 
         for (SysUser sysUser : guoLv) {
-            if (!sysUser.getUserId().equals(Long.valueOf(userId))) {
+            if (!sysUser.getUserId().equals(Long.valueOf(userId))&&!sysUser.getUserId().equals(Long.valueOf("1"))) {
                 sc.add(sysUser);
             }
         }
