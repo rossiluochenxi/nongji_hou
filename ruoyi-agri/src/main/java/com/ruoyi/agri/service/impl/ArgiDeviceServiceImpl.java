@@ -1,7 +1,10 @@
 package com.ruoyi.agri.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.agri.domain.ArgiMachinery;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.uuid.IdUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,9 @@ public class ArgiDeviceServiceImpl implements IArgiDeviceService
 {
     @Autowired
     private ArgiDeviceMapper argiDeviceMapper;
+
+    @Autowired
+    private ArgiMachineryServiceImpl argiMachineryServiceImpl;
 
     /**
      * 查询设备管理
@@ -56,6 +62,15 @@ public class ArgiDeviceServiceImpl implements IArgiDeviceService
     {
         argiDevice.setCreateTime(DateUtils.getNowDate());
         argiDevice.setId(IdUtils.randomUUID());
+        //修改状态
+        if (!StringUtils.isBlank(argiDevice.getArgiMachineryId())) {
+            // 字符串为空、null 或仅包含空白字符
+            ArgiMachinery argiMachinery = new ArgiMachinery();
+            argiMachinery.setId(argiDevice.getArgiMachineryId());
+            argiMachinery.setDeviceBindingStatus("1");
+            argiMachineryServiceImpl.updateArgiMachinery(argiMachinery);
+
+        }
         return argiDeviceMapper.insertArgiDevice(argiDevice);
     }
 
@@ -69,7 +84,22 @@ public class ArgiDeviceServiceImpl implements IArgiDeviceService
     public int updateArgiDevice(ArgiDevice argiDevice)
     {
         argiDevice.setUpdateTime(DateUtils.getNowDate());
-        return argiDeviceMapper.updateArgiDevice(argiDevice);
+        //先把原先的农机绑定重置回原来的状态
+        ArgiDevice resetArgiDevice= this.selectArgiDeviceById(argiDevice.getId());
+        if (!StringUtils.isBlank(resetArgiDevice.getArgiMachineryId())) {
+            ArgiMachinery  resetArgiMachinery = new ArgiMachinery();
+            resetArgiMachinery.setId(resetArgiDevice.getArgiMachineryId());
+            resetArgiMachinery.setDeviceBindingStatus("0");
+            argiMachineryServiceImpl.updateArgiMachinery(resetArgiMachinery);
+        }
+        //再把本次修改的农机设定为绑定状态
+        if (!StringUtils.isBlank(argiDevice.getArgiMachineryId())) {
+            ArgiMachinery argiMachinery = new ArgiMachinery();
+            argiMachinery.setId(argiDevice.getArgiMachineryId());
+            argiMachinery.setDeviceBindingStatus("1");
+            argiMachineryServiceImpl.updateArgiMachinery(argiMachinery);
+        }
+         return argiDeviceMapper.updateArgiDevice(argiDevice);
     }
 
     /**

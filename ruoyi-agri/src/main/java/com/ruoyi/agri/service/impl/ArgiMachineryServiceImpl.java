@@ -59,6 +59,8 @@ public class ArgiMachineryServiceImpl implements IArgiMachineryService
     {
         argiMachinery.setCreateTime(DateUtils.getNowDate());
         argiMachinery.setId(IdUtils.randomUUID());
+        argiMachinery.setDeviceBindingStatus("0");
+        argiMachinery.setWorkingStatus("0");
         return argiMachineryMapper.insertArgiMachinery(argiMachinery);
     }
 

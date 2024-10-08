@@ -41,6 +41,31 @@ public class ArgiMachinery extends BaseEntity
     /** 农机类型 */
     @Excel(name = "农机类型")
     private String machineryType;
+    /** 绑定设备状态 */
+    private String deviceBindingStatus;
+
+    /** 农机工作状态 */
+    private String workingStatus;
+
+    public String getWorkingStatus() {
+        return workingStatus;
+    }
+
+    public void setWorkingStatus(String workingStatus) {
+        this.workingStatus = workingStatus;
+    }
+
+
+
+    public String getDeviceBindingStatus() {
+        return deviceBindingStatus;
+    }
+
+    public void setDeviceBindingStatus(String deviceBindingStatus) {
+        this.deviceBindingStatus = deviceBindingStatus;
+    }
+
+
 
     /** 农机长度 */
     @Excel(name = "农机长度")

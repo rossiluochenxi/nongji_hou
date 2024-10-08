@@ -56,6 +56,8 @@ public class ArgiMachineryController extends BaseController
     @GetMapping("/listMachineryQuery")
     public TableDataInfo listMachineryQuery(ArgiMachinery argiMachinery)
     {
+        //查询设备绑定状态是0的设备
+        argiMachinery.setDeviceBindingStatus("0");
         List<ArgiMachinery> list = argiMachineryService.selectArgiMachineryList(argiMachinery);
         return getDataTable(list);
     }
